@@ -1,0 +1,14 @@
+//
+// Created by ajatprabha on 12/3/18.
+//
+
+#ifndef CLASSROOMBOOKINGSYSTEM_USER_MODELS_H
+#define CLASSROOMBOOKINGSYSTEM_USER_MODELS_H
+
+
+class models {
+
+};
+
+
+#endif //CLASSROOMBOOKINGSYSTEM_USER_MODELS_H
