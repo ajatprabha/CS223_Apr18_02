@@ -31,5 +31,8 @@
 *.out
 *.app
 
-# CLion configs
+# CLion configurations
 .idea/
+
+# Cmake build configurations and folders
+cmake-build-debug/
