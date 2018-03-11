@@ -3,4 +3,4 @@ project(ClassroomBookingSystem)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(ClassroomBookingSystem src/main.cpp)
+add_executable(ClassroomBookingSystem src/main.cpp src/init.cpp src/init.h)
