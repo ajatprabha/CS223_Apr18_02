@@ -5,9 +5,21 @@
 #ifndef CLASSROOMBOOKINGSYSTEM_INIT_H
 #define CLASSROOMBOOKINGSYSTEM_INIT_H
 
+#include <iostream>
 
-class init {
+using namespace std;
 
+
+class Application {
+private:
+    static Application *instance;
+
+    Application() = default;
+
+public:
+    static Application &getInstance();
+
+    void start();
 };
 
 
