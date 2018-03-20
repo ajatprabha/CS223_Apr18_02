@@ -6,6 +6,7 @@
 #define CLASSROOMBOOKINGSYSTEM_INIT_H
 
 #include <iostream>
+#include "users/models.h"
 
 using namespace std;
 
@@ -13,6 +14,7 @@ using namespace std;
 class Application {
 private:
     static Application *instance;
+    static BaseUser *user;
 
     Application() = default;
 
@@ -20,6 +22,8 @@ public:
     static Application &getInstance();
 
     void start();
+
+    bool login(const string &_email, const string &_password);
 };
 
 
