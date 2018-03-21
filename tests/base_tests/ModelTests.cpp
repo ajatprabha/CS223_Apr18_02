@@ -26,6 +26,16 @@ TEST_F(ModelTestFixture, test_size_zero_without_save) {
     ASSERT_EQ(Mock::all().size(), 0);
 }
 
-TEST(BASIC_CHECK, test_eq) {
-    ASSERT_EQ(1, 1);
+TEST_F(ModelTestFixture, test_size_zero_after_save_and_delete) {
+    Mock object = Mock();
+    object.save();
+    ASSERT_EQ(Mock::all().size(), 1);
+    object.remove();
+    ASSERT_EQ(Mock::all().size(), 0);
+}
+
+TEST_F(ModelTestFixture, test_size_one_with_save) {
+    Mock object = Mock();
+    object.save();
+    ASSERT_EQ(Mock::all().size(), 1);
 }
