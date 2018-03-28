@@ -6,15 +6,18 @@
 #define CLASSROOMBOOKINGSYSTEM_INIT_H
 
 #include <iostream>
+#include <base/views.h>
 #include "users/models.h"
+#include "controller.h"
 
 using namespace std;
-
 
 class Application {
 private:
     static Application *instance;
     static BaseUser *user;
+    static View *view;
+    Controller controller = Controller::getInstance();
 
     Application() = default;
 
@@ -24,6 +27,8 @@ public:
     void start();
 
     bool login(const string &_email, const string &_password);
+
+    void display();
 };
 
 
