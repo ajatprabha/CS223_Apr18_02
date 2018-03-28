@@ -22,7 +22,10 @@ void Application::start() {
     controller.addViewPattern("splash", new SplashView);
     this->view = controller.getView("splash");
     while (this->view) {
-        this->display();
+        Context tmp{};
+        tmp.user = *user;
+        Response response = this->view->call(tmp);
+        this->view = response.view;
     }
 }
 
@@ -34,11 +37,4 @@ bool Application::login(const string &_email, const string &_password) {
             return true;
         }
     } else return false;
-}
-
-void Application::display() {
-    //TODO
-    Context tmp{};
-    Response response = view->call(tmp);
-    this->view = response.view;
 }

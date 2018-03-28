@@ -27,8 +27,6 @@ public:
     void start();
 
     bool login(const string &_email, const string &_password);
-
-    void display();
 };
 
 

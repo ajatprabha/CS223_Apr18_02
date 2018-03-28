@@ -21,7 +21,7 @@ struct Response;
 
 
 class View {
-private:
+protected:
     Context context;
 public:
     virtual void display();

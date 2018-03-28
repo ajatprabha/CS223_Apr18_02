@@ -17,5 +17,5 @@ Response View::call(const Context &contextPassed) {
 }
 
 void SplashView::display() {
-    cout << "Splash View called\n";
+    cout << context.user.getFullName() << endl;
 }
