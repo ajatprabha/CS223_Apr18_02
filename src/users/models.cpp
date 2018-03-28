@@ -9,7 +9,7 @@ bool BaseUser::isAdmin() {
 }
 
 string BaseUser::getFullName() {
-    return string(firstName) + string(lastName);
+    return string(firstName) + " " + string(lastName);
 }
 
 void BaseUser::setPassword(const string &_password) {
