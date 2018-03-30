@@ -16,6 +16,9 @@ private:
 public:
     BaseUser() = default;
 
+    BaseUser(const string &passedFirstName, const string &passedLastName, const string &passedEmail,
+             const string &passedPassword);
+
     virtual bool isAdmin();
 
     string getFullName();
@@ -36,7 +39,7 @@ public:
 
     void *setEmail(const string &_email);
 
-    static BaseUser* findByEmail(const string &_email);
+    static BaseUser *findByEmail(const string &_email);
 };
 
 

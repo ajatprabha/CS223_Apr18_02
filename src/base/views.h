@@ -29,7 +29,7 @@ protected:
     static Response *response;
     string title;
     vector<string> menuOptions;
-    vector<FnPtr> menuActions;
+    vector<FnPtr> menuActions = {};
 
     View(const string &passedTitle, const vector<string> &passedVector, const vector<FnPtr> &passedActions);
 
@@ -65,12 +65,21 @@ ModelView<T>::ModelView(T *object) {
     this->object = object;
 }
 
+class LoginView : public View {
+public:
+    LoginView() : View("Enter your credentials to login to the system\n", {}, {}) {}
+
+    void display() override;
+};
+
 class SplashView : public View {
 public:
     SplashView() : View("Welcome to ClassRoomBooking system\nChoose from the options below\n", {"Login", "Exit"},
-                        {exit, exit}) {}
+                        {callLoginView, exit}) {}
 
     void display() override;
+
+    static void callLoginView();
 };
 
 

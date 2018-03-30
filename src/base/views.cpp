@@ -2,6 +2,7 @@
 // Created by ajatprabha on 12/3/18.
 //
 
+#include <init.h>
 #include "views.h"
 
 Response *View::response = nullptr;
@@ -39,4 +40,21 @@ void SplashView::display() {
     int choice;
     cin >> choice;
     callAction(choice - 1);
+}
+
+void SplashView::callLoginView() {
+    response->view = Controller::getInstance().getView("login");
+}
+
+void LoginView::display() {
+    populateMenu();
+    string email, password;
+    cout << "Enter your email and password\n";
+    cin >> email >> password;
+    if (Application::getInstance().login(email, password)) {
+        cout << "Logged in\n";
+        response->view = nullptr;
+    } else {
+        cout << "Invalid credentials\n";
+    }
 }

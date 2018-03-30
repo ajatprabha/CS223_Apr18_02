@@ -21,7 +21,7 @@ struct ViewPattern {
 class Controller {
 private:
     static Controller *instance;
-    vector<ViewPattern> views_list;
+    static vector<ViewPattern> *views_list;
 
     Controller() = default;
 

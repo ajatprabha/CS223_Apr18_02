@@ -5,6 +5,7 @@
 #include "controller.h"
 
 Controller *Controller::instance = nullptr;
+vector<ViewPattern> *Controller::views_list = nullptr;
 
 ViewPattern::ViewPattern(const string &name, View *view) {
     this->name = name;
@@ -13,11 +14,12 @@ ViewPattern::ViewPattern(const string &name, View *view) {
 
 void Controller::addViewPattern(const string &name, View *view) {
     ViewPattern temp = ViewPattern(name, view);
-    views_list.push_back(temp);
+    if (!views_list) views_list = new vector<ViewPattern>;
+    views_list->push_back(temp);
 }
 
 View *Controller::getView(const string &name) {
-    for (auto &i : views_list) {
+    for (auto &i : *views_list) {
         if (i.name == name) {
             return i.view;
         }
