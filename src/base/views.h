@@ -9,6 +9,7 @@
 #include "models.h"
 #include "exceptions.h"
 #include <users/models.h>
+#include <vector>
 
 using namespace std;
 
@@ -23,9 +24,19 @@ struct Response;
 class View {
 protected:
     Context context;
+    string title;
+    vector<string> menu_options;
+
+    View(const string &passedTitle, const vector<string> &passedVector);
+
 public:
+    View() = default;
+
     virtual void display();
-    virtual Response call(const Context&);
+
+    virtual Response call(const Context &);
+
+    void populateMenu();
 };
 
 
@@ -48,6 +59,8 @@ ModelView<T>::ModelView(T *object) {
 
 class SplashView : public View {
 public:
+    SplashView() : View("Welcome to ClassRoomBooking system\nChoose from the options below\n", {"Login", "Exit"}) {};
+
     void display() override;
 };
 

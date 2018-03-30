@@ -16,6 +16,18 @@ Response View::call(const Context &contextPassed) {
     return response;
 }
 
+void View::populateMenu() {
+    cout << title << endl;
+    for (int i = 0; i < menu_options.size(); ++i) {
+        cout << i + 1 << ". " << menu_options[i] << endl;
+    }
+}
+
+View::View(const string &passedTitle, const vector<string> &passedVector) {
+    title = passedTitle;
+    menu_options = passedVector;
+}
+
 void SplashView::display() {
-    cout << context.user.getFullName() << endl;
+    populateMenu();
 }
