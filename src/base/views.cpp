@@ -4,30 +4,39 @@
 
 #include "views.h"
 
-void View::display() {
-    throw NotImplementedError("Method display of class View must be implemented by subclass");
-}
+Response *View::response = nullptr;
 
 Response View::call(const Context &contextPassed) {
+    response = new Response;
     context = contextPassed;
     display();
-    Response response{};
-    response.view = nullptr;
-    return response;
+    return *response;
 }
 
 void View::populateMenu() {
     cout << title << endl;
-    for (int i = 0; i < menu_options.size(); ++i) {
-        cout << i + 1 << ". " << menu_options[i] << endl;
+    for (int i = 0; i < menuOptions.size(); ++i) {
+        cout << i + 1 << ". " << menuOptions[i] << endl;
     }
 }
 
-View::View(const string &passedTitle, const vector<string> &passedVector) {
+View::View(const string &passedTitle, const vector<string> &passedVector, const vector<FnPtr> &passedActions) {
     title = passedTitle;
-    menu_options = passedVector;
+    menuOptions = passedVector;
+    menuActions = passedActions;
+}
+
+void View::callAction(int menuPosition) {
+    menuActions[menuPosition]();
+}
+
+void View::exit() {
+    response->view = nullptr;
 }
 
 void SplashView::display() {
     populateMenu();
+    int choice;
+    cin >> choice;
+    callAction(choice - 1);
 }

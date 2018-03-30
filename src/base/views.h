@@ -10,9 +10,11 @@
 #include "exceptions.h"
 #include <users/models.h>
 #include <vector>
+#include <map>
 
 using namespace std;
 
+typedef void (*FnPtr)();
 
 struct Context {
     BaseUser user;
@@ -24,19 +26,25 @@ struct Response;
 class View {
 protected:
     Context context;
+    static Response *response;
     string title;
-    vector<string> menu_options;
+    vector<string> menuOptions;
+    vector<FnPtr> menuActions;
 
-    View(const string &passedTitle, const vector<string> &passedVector);
+    View(const string &passedTitle, const vector<string> &passedVector, const vector<FnPtr> &passedActions);
 
 public:
     View() = default;
 
-    virtual void display();
+    virtual void display() = 0;
 
     virtual Response call(const Context &);
 
     void populateMenu();
+
+    void callAction(int menuPosition = 0);
+
+    static void exit();
 };
 
 
@@ -59,7 +67,8 @@ ModelView<T>::ModelView(T *object) {
 
 class SplashView : public View {
 public:
-    SplashView() : View("Welcome to ClassRoomBooking system\nChoose from the options below\n", {"Login", "Exit"}) {};
+    SplashView() : View("Welcome to ClassRoomBooking system\nChoose from the options below\n", {"Login", "Exit"},
+                        {exit, exit}) {}
 
     void display() override;
 };
