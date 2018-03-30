@@ -16,10 +16,9 @@ Application &Application::getInstance() {
 }
 
 void Application::start() {
-    cout << "Application started!\n";
     // Initialise all the static properties
+    loadViewPatterns();
     this->user = new BaseUser;
-    controller.addViewPattern("splash", new SplashView);
     this->view = controller.getView("splash");
     while (this->view) {
         Context tmp{};
@@ -37,4 +36,8 @@ bool Application::login(const string &_email, const string &_password) {
             return true;
         }
     } else return false;
+}
+
+void Application::loadViewPatterns() {
+    controller.addViewPattern("splash", new SplashView);
 }
