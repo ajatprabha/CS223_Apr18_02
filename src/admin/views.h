@@ -11,7 +11,7 @@
 
 class AdminPanelView : public View {
 public:
-    AdminPanelView() : View("\tAdmin panel\n\tHere you can perform the following actions.\n",
+    AdminPanelView() : View("Admin panel\nYou can perform the following actions.\n",
                             {"Create new admin", "Delete admin/professor", "Exit"},
                             {createAdmin, deleteUser, exit}) {}
 

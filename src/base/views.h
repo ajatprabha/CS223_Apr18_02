@@ -10,7 +10,6 @@
 #include "exceptions.h"
 #include "mixins.h"
 #include "forms.h"
-//#include "controller.h"
 #include <users/models.h>
 #include <vector>
 #include <map>
@@ -20,12 +19,12 @@ using namespace std;
 typedef void (*FnPtr)();
 
 struct Context {
-    BaseUser user;
+    BaseUser *user = nullptr;
     int requestObjectId = -1;
 
     Context() = default;
 
-    Context(const BaseUser &passedUser, int passedRequestObjectId);
+    Context(BaseUser *passedUser, int passedRequestObjectId);
 };
 
 struct Response;

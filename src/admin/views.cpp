@@ -10,6 +10,7 @@ void AdminDetailView::display() {
 }
 
 void AdminPanelView::display() {
+    cout << "Admin: " << context.user->getFullName() << endl;
     populateMenu();
     int choice;
     cin >> choice;
@@ -20,7 +21,7 @@ void AdminPanelView::deleteUser() {
     cout << "Enter the ID of user to delete:\n";
     int id;
     cin >> id;
-    AdminDeleteView().call({*Application::getInstance().getCurrentUser(), id});
+    AdminDeleteView().call({Application::getInstance().getCurrentUser(), id});
     response->view = Controller::getInstance().getView("admin-panel");
 }
 
@@ -32,7 +33,7 @@ void AdminDeleteView::display() {
     DeleteView::display();
 }
 
-Context::Context(const BaseUser &passedUser, int passedRequestObjectId) {
+Context::Context(BaseUser *passedUser, int passedRequestObjectId) {
     user = passedUser;
     requestObjectId = passedRequestObjectId;
 }

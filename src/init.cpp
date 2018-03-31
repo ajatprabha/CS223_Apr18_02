@@ -18,11 +18,10 @@ Application &Application::getInstance() {
 void Application::start() {
     // Initialise all the static properties
     loadViewPatterns();
-    this->user = new BaseUser("Ajat", "Prabha", "admin@email.com", "password", true);
-    this->user->save();
+    BaseUser("Ajat", "Prabha", "admin@email.com", "password", true).save();
     this->view = controller.getView("splash");
     while (this->view) {
-        Context tmp(*user, -1);
+        Context tmp(this->user, -1);
         Response response = this->view->call(tmp);
         this->view = response.view;
         cout << "=========================================================\n";
