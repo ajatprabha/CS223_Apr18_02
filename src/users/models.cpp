@@ -5,7 +5,7 @@
 #include "models.h"
 
 bool BaseUser::isAdmin() {
-    return false;
+    return admin;
 }
 
 string BaseUser::getFullName() {
@@ -66,9 +66,10 @@ BaseUser *BaseUser::findByEmail(const string &_email) {
 }
 
 BaseUser::BaseUser(const string &passedFirstName, const string &passedLastName, const string &passedEmail,
-                   const string &passedPassword) {
+                   const string &passedPassword, bool passedAdmin) {
     setFirstName(passedFirstName);
     setLastName(passedLastName);
     setEmail(passedEmail);
     setPassword(passedPassword);
+    admin = passedAdmin;
 }

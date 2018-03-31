@@ -51,10 +51,19 @@ void LoginView::display() {
     string email, password;
     cout << "Enter your email and password\n";
     cin >> email >> password;
-    if (Application::getInstance().login(email, password)) {
-        cout << "Logged in\n";
-        response->view = nullptr;
+    Application appInstance = Application::getInstance();
+    if (appInstance.login(email, password)) {
+        Controller controller = Controller::getInstance();
+        if (appInstance.getCurrentUser()->isAdmin()) {
+            response->view = controller.getView("admin-detail");
+        }
     } else {
+        response->view = nullptr;
         cout << "Invalid credentials\n";
     }
+}
+
+void AdminDetailView::display() {
+    cout << "Admin detail view called\n";
+    response->view = nullptr;
 }

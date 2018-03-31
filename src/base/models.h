@@ -23,6 +23,8 @@ public:
     virtual T &save();
 
     virtual bool remove();
+
+    virtual T *findById(int id);
 };
 
 template<class T>
@@ -53,6 +55,15 @@ template<class T>
 bool Model<T>::remove() {
     Model<T>::objectList.erase(this->id);
     return true;
+}
+
+template<class T>
+T *Model<T>::findById(int id) {
+    auto it = objectList.find(id);
+    if (it != objectList.end()) {
+        return &(dynamic_cast<T &> (it->second));
+    }
+    return nullptr;
 }
 
 

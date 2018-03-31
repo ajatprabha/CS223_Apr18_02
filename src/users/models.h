@@ -13,13 +13,14 @@ private:
     char lastName[64]{};
     char password[64]{};
     char email[64]{};
+    bool admin = false;
 public:
     BaseUser() = default;
 
     BaseUser(const string &passedFirstName, const string &passedLastName, const string &passedEmail,
-             const string &passedPassword);
+             const string &passedPassword, bool passedAdmin);
 
-    virtual bool isAdmin();
+    bool isAdmin();
 
     string getFullName();
 
@@ -42,5 +43,12 @@ public:
     static BaseUser *findByEmail(const string &_email);
 };
 
+class Admin : public BaseUser {
+
+};
+
+class Professor : public BaseUser {
+
+};
 
 #endif //CLASSROOMBOOKINGSYSTEM_USER_MODELS_H

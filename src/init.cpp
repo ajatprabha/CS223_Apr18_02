@@ -18,7 +18,7 @@ Application &Application::getInstance() {
 void Application::start() {
     // Initialise all the static properties
     loadViewPatterns();
-    this->user = new BaseUser("Ajat", "Prabha", "admin@email.com", "password");
+    this->user = new BaseUser("Ajat", "Prabha", "admin@email.com", "password", true);
     this->user->save();
     this->view = controller.getView("splash");
     while (this->view) {
@@ -42,4 +42,9 @@ bool Application::login(const string &_email, const string &_password) {
 void Application::loadViewPatterns() {
     controller.addViewPattern("splash", new SplashView);
     controller.addViewPattern("login", new LoginView);
+    controller.addViewPattern("admin-detail", new AdminDetailView);
+}
+
+BaseUser *Application::getCurrentUser() {
+    return user;
 }

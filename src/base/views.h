@@ -8,6 +8,7 @@
 #include <iostream>
 #include "models.h"
 #include "exceptions.h"
+#include "mixins.h"
 #include <users/models.h>
 #include <vector>
 #include <map>
@@ -53,17 +54,9 @@ struct Response {
 };
 
 template<class T>
-class ModelView : public View {
-private:
-    T *object;
-public:
-    explicit ModelView(T *object);
-};
+class DetailView : public SingleObjectMixin<T>, public View {
 
-template<class T>
-ModelView<T>::ModelView(T *object) {
-    this->object = object;
-}
+};
 
 class LoginView : public View {
 public:
@@ -80,6 +73,11 @@ public:
     void display() override;
 
     static void callLoginView();
+};
+
+class AdminDetailView : public DetailView<BaseUser> {
+public:
+    void display() override;
 };
 
 
