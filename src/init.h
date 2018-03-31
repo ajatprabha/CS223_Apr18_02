@@ -35,5 +35,15 @@ public:
     BaseUser *getCurrentUser();
 };
 
+class SplashView : public View {
+public:
+    SplashView() : View("Welcome to ClassRoomBooking system\nChoose from the options below\n", {"Login", "Exit"},
+                        {callLoginView, exit}) {}
+
+    void display() override;
+
+    static void callLoginView();
+};
+
 
 #endif //CLASSROOMBOOKINGSYSTEM_INIT_H

@@ -10,7 +10,7 @@
 #include "exceptions.h"
 #include "mixins.h"
 #include "forms.h"
-#include "controller.h"
+//#include "controller.h"
 #include <users/models.h>
 #include <vector>
 #include <map>
@@ -88,15 +88,5 @@ void DeleteView<T>::display() {
     }
     cout << "Successfully deleted.\n";
 }
-
-class SplashView : public View {
-public:
-    SplashView() : View("Welcome to ClassRoomBooking system\nChoose from the options below\n", {"Login", "Exit"},
-                        {callLoginView, exit}) {}
-
-    void display() override;
-
-    static void callLoginView();
-};
 
 #endif //CLASSROOMBOOKINGSYSTEM_VIEWS_H

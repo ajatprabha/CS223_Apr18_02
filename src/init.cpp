@@ -50,3 +50,14 @@ void Application::loadViewPatterns() {
 BaseUser *Application::getCurrentUser() {
     return user;
 }
+
+void SplashView::display() {
+    populateMenu();
+    int choice;
+    cin >> choice;
+    callAction(choice - 1);
+}
+
+void SplashView::callLoginView() {
+    response->view = Controller::getInstance().getView("login");
+}
