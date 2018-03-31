@@ -24,7 +24,7 @@ void Application::start() {
         Context tmp(this->user, -1);
         Response response = this->view->call(tmp);
         this->view = response.view;
-        cout << "=========================================================\n";
+        cout << "=========================================================\n\n";
     }
 }
 

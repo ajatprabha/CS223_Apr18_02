@@ -84,8 +84,8 @@ void DeleteView<T>::display() {
     T *object = SingleObjectMixin<T>::getObject(context.requestObjectId);
     if (object) {
         object->remove();
-    }
-    cout << "Successfully deleted.\n";
+        cout << "Successfully deleted.\n";
+    } else cout << "Not found.\n";
 }
 
 #endif //CLASSROOMBOOKINGSYSTEM_VIEWS_H
