@@ -10,6 +10,7 @@
 #include "exceptions.h"
 #include "mixins.h"
 #include "forms.h"
+#include "controller.h"
 #include <users/models.h>
 #include <vector>
 #include <map>

@@ -2,7 +2,6 @@
 // Created by ajatprabha on 12/3/18.
 //
 
-#include <init.h>
 #include "views.h"
 
 Response *View::response = nullptr;
