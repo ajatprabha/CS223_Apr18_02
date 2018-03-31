@@ -12,16 +12,17 @@ class SingleObjectMixin : public Model<T> {
 protected:
     T *object = nullptr;
 public:
-    virtual T *getObject(int passedId);
+    static T *getObject(int passedId);
 };
 
 template<class T>
 T *SingleObjectMixin<T>::getObject(int passedId) {
+    T *objectPointer = nullptr;
     auto it = T::all().find(passedId);
     if (it != T::all().end()) {
-        object = dynamic_cast<T *> (&it->second);
+        objectPointer = dynamic_cast<T *> (&it->second);
     }
-    return object;
+    return objectPointer;
 }
 
 #endif //CLASSROOMBOOKINGSYSTEM_MIXINS_H

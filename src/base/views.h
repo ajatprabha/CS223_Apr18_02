@@ -19,6 +19,11 @@ typedef void (*FnPtr)();
 
 struct Context {
     BaseUser user;
+    int requestObjectId = -1;
+
+    Context() = default;
+
+    Context(const BaseUser &passedUser, int passedRequestObjectId);
 };
 
 struct Response;
@@ -26,7 +31,7 @@ struct Response;
 
 class View {
 protected:
-    Context context;
+    Context context{};
     static Response *response;
     string title;
     vector<string> menuOptions;
@@ -55,7 +60,14 @@ struct Response {
 
 template<class T>
 class DetailView : public SingleObjectMixin<T>, public View {
+public:
+    DetailView() = default;
+};
 
+template<class T>
+class DeleteView : public SingleObjectMixin<T>, public View {
+public:
+    void display() override;
 };
 
 class LoginView : public View {
@@ -77,7 +89,24 @@ public:
 
 class AdminDetailView : public DetailView<BaseUser> {
 public:
+    AdminDetailView() = default;
+
     void display() override;
+};
+
+class AdminPanelView : public View {
+public:
+    AdminPanelView() : View("\tAdmin panel\n\tHere you can perform the following actions.\n", {"Delete user", "Exit"},
+                            {deleteUser, exit}) {}
+
+    void display() override;
+
+    static void deleteUser();
+};
+
+class AdminDeleteView : public DeleteView<BaseUser> {
+public:
+    void display() final;
 };
 
 

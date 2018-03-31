@@ -24,7 +24,7 @@ public:
 
     virtual bool remove();
 
-    virtual T *findById(int id);
+    static T *findById(int id);
 };
 
 template<class T>

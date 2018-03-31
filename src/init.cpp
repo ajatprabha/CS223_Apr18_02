@@ -22,8 +22,7 @@ void Application::start() {
     this->user->save();
     this->view = controller.getView("splash");
     while (this->view) {
-        Context tmp{};
-        tmp.user = *user;
+        Context tmp(*user, -1);
         Response response = this->view->call(tmp);
         this->view = response.view;
     }
@@ -42,7 +41,9 @@ bool Application::login(const string &_email, const string &_password) {
 void Application::loadViewPatterns() {
     controller.addViewPattern("splash", new SplashView);
     controller.addViewPattern("login", new LoginView);
+    controller.addViewPattern("admin-panel", new AdminPanelView);
     controller.addViewPattern("admin-detail", new AdminDetailView);
+    controller.addViewPattern("admin-delete", new AdminDeleteView);
 }
 
 BaseUser *Application::getCurrentUser() {

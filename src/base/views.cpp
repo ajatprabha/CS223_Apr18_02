@@ -35,6 +35,15 @@ void View::exit() {
     response->view = nullptr;
 }
 
+template<class T>
+void DeleteView<T>::display() {
+    T *object = SingleObjectMixin<T>::getObject(context.requestObjectId);
+    if (object) {
+        object->remove();
+    }
+    cout << "Successfully deleted.\n";
+}
+
 void SplashView::display() {
     populateMenu();
     int choice;
@@ -55,7 +64,7 @@ void LoginView::display() {
     if (appInstance.login(email, password)) {
         Controller controller = Controller::getInstance();
         if (appInstance.getCurrentUser()->isAdmin()) {
-            response->view = controller.getView("admin-detail");
+            response->view = controller.getView("admin-panel");
         }
     } else {
         response->view = nullptr;
@@ -66,4 +75,28 @@ void LoginView::display() {
 void AdminDetailView::display() {
     cout << "Admin detail view called\n";
     response->view = nullptr;
+}
+
+void AdminPanelView::display() {
+    populateMenu();
+    int choice;
+    cin >> choice;
+    callAction(choice - 1);
+}
+
+void AdminPanelView::deleteUser() {
+    cout << "Enter the ID of user to delete:\n";
+    int id;
+    cin >> id;
+    AdminDeleteView().call({*Application::getInstance().getCurrentUser(), id});
+    response->view = Controller::getInstance().getView("admin-panel");
+}
+
+void AdminDeleteView::display() {
+    DeleteView::display();
+}
+
+Context::Context(const BaseUser &passedUser, int passedRequestObjectId) {
+    user = passedUser;
+    requestObjectId = passedRequestObjectId;
 }
