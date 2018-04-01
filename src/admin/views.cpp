@@ -16,8 +16,15 @@ void AdminPanelView::display() {
 }
 
 void AdminPanelView::deleteUser() {
-    cout << "Enter the ID of user to delete:\n";
-    AdminDeleteView().call({Application::getInstance().getCurrentUser(), Input::getInt()});
+    cout << "Enter the email of user to delete:\n";
+    string email;
+    cin >> email;
+    BaseUser *user = BaseUser::findByEmail(email);
+    if (!user) {
+        cout << "No user with this email exists.\n";
+    } else {
+        DeleteUserView().call({Application::getInstance().getCurrentUser(), user->getId()});
+    }
     response->view = Controller::getInstance().getView("admin-panel");
 }
 
@@ -29,7 +36,7 @@ void AdminPanelView::updateUser() {
     response->view = Controller::getInstance().getView("update-user");
 }
 
-void AdminDeleteView::display() {
+void DeleteUserView::display() {
     DeleteView::display();
 }
 

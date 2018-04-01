@@ -29,7 +29,7 @@ public:
     void display() override;
 };
 
-class AdminDeleteView : public DeleteView<BaseUser> {
+class DeleteUserView : public DeleteView<BaseUser> {
 public:
     void display() final;
 };

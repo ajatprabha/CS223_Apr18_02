@@ -47,7 +47,7 @@ void Application::loadViewPatterns() {
     controller.addViewPattern("update-user", new UserUpdateView);
     controller.addViewPattern("admin-panel", new AdminPanelView);
     controller.addViewPattern("admin-detail", new AdminDetailView);
-    controller.addViewPattern("admin-delete", new AdminDeleteView);
+    controller.addViewPattern("admin-delete", new DeleteUserView);
 }
 
 BaseUser *Application::getCurrentUser() {
