@@ -110,8 +110,14 @@ void AdminCreateView::display() {
     string firstName, lastName, email, password;
     cout << "Enter first name, last name, email and password respectively.\n";
     cin >> firstName >> lastName >> email >> password;
-    Admin temp(firstName, lastName, email, password);
-    temp.save();
-    cout << "New admin saved successfully.\n";
+    form = new AdminCreateForm(firstName, lastName, email, password);
+    if (form->isValid()) {
+        BaseUser user = form->save();
+        cout << "New admin saved successfully.\n";
+    } else {
+        for (auto &error : form->getErrors()) {
+            cout << error << endl;
+        }
+    }
     response->view = Controller::getInstance().getView("admin-panel");
 }

@@ -9,6 +9,7 @@
 #include "models.h"
 #include "exceptions.h"
 #include "mixins.h"
+#include "forms.h"
 #include <users/models.h>
 #include <vector>
 #include <map>
@@ -60,6 +61,8 @@ struct Response {
 
 template<class T>
 class CreateView : public View {
+protected:
+    ModelForm<T> *form;
 public:
     void display() override = 0;
 };
