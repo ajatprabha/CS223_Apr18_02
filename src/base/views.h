@@ -73,6 +73,14 @@ public:
 };
 
 template<class T>
+class UpdateView : public View {
+protected:
+    ModelForm<T> *form;
+public:
+    void display() override = 0;
+};
+
+template<class T>
 class DetailView : public SingleObjectMixin<T>, public View {
 public:
     DetailView() = default;

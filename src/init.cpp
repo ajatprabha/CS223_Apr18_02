@@ -44,6 +44,7 @@ void Application::loadViewPatterns() {
     controller.addViewPattern("splash", new SplashView);
     controller.addViewPattern("login", new LoginView);
     controller.addViewPattern("create-user", new UserCreateView);
+    controller.addViewPattern("update-user", new UserUpdateView);
     controller.addViewPattern("admin-panel", new AdminPanelView);
     controller.addViewPattern("admin-detail", new AdminDetailView);
     controller.addViewPattern("admin-delete", new AdminDeleteView);

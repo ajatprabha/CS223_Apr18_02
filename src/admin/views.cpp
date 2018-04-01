@@ -10,7 +10,7 @@ void AdminDetailView::display() {
 }
 
 void AdminPanelView::display() {
-    cout << "Admin: " << context.user->getFullName() << endl;
+    cout << "Admin: " << Application::getInstance().getCurrentUser()->getFullName() << endl;
     populateMenu();
     callAction(Input::getInt() - 1);
 }
@@ -23,6 +23,10 @@ void AdminPanelView::deleteUser() {
 
 void AdminPanelView::createUser() {
     response->view = Controller::getInstance().getView("create-user");
+}
+
+void AdminPanelView::updateUser() {
+    response->view = Controller::getInstance().getView("update-user");
 }
 
 void AdminDeleteView::display() {

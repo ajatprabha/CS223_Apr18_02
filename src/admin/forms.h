@@ -8,12 +8,13 @@
 
 #include "../base/forms.h"
 
-class UserCreateForm : public ModelForm<BaseUser> {
+class UserCreateUpdateForm : public ModelForm<BaseUser> {
     string firstName, lastName, email, password;
     bool adminStatus;
 public:
-    UserCreateForm(const string &passedFirstName, const string &passedLastName, const string &passedEmail,
-                    const string &passedPassword, bool passedAdmin);
+    UserCreateUpdateForm(const string &passedFirstName, const string &passedLastName,
+                   const string &passedEmail, const string &passedPassword, bool passedAdmin,
+                   BaseUser *passedInstance = nullptr);
 
     void clean() override;
 

@@ -30,6 +30,8 @@ public:
 
 template<class T>
 class ModelForm : public Form {
+protected:
+    T *instance = nullptr;
 public:
     virtual T &save() = 0;
 };

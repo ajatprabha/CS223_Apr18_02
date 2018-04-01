@@ -30,10 +30,31 @@ void UserCreateView::display() {
     cin >> firstName >> lastName >> email >> password;
     cout << "Should this user be an admin? (y/n)\n";
     cin >> adminStatus;
-    form = new UserCreateForm(firstName, lastName, email, password, adminStatus == 'y');
+    form = new UserCreateUpdateForm(firstName, lastName, email, password, adminStatus == 'y');
     if (form->isValid()) {
         BaseUser user = form->save();
-        cout << "New user saved successfully.\n";
+        cout << "New user, " + user.getFullName() + " saved successfully.\n";
+    } else {
+        form->printErrors();
+    }
+    response->view = Controller::getInstance().getView("admin-panel");
+}
+
+void UserUpdateView::display() {
+    cout << "To update a user fill in the details asked below: \n";
+    string email, firstName, lastName, password;
+    char adminStatus;
+    cout << "Enter the email of user:\n";
+    cin >> email;
+    cout << "Enter first name, last name and password respectively.\n";
+    cin >> firstName >> lastName >> password;
+    cout << "Should this user be an admin? (y/n)\n";
+    cin >> adminStatus;
+    form = new UserCreateUpdateForm(firstName, lastName, email, password, adminStatus == 'y',
+                                    BaseUser::findByEmail(email));
+    if (form->isValid()) {
+        BaseUser user = form->save();
+        cout << "User " + user.getFullName() + " updated successfully.\n";
     } else {
         form->printErrors();
     }

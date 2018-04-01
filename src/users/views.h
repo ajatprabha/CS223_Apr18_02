@@ -20,5 +20,9 @@ public:
     void display() override;
 };
 
+class UserUpdateView : public UpdateView<BaseUser> {
+public:
+    void display() override;
+};
 
 #endif //CLASSROOMBOOKINGSYSTEM_VIEWS_H

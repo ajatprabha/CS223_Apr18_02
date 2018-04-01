@@ -37,6 +37,8 @@ public:
     static void writeToFile(const string &filename);
 
     static void readFromFile(const string &filename);
+
+    void setId(int id);
 };
 
 template<class T>
@@ -105,9 +107,9 @@ template<class T>
 void Model<T>::readFromFile(const string &filename) {
     fstream file;
     file.open(filename, ios::in | ios::out | ios::binary);
-    if (!file) {
-        cout << "Error in opening file '" + filename + "'" + "\n";
-    }
+//    if (!file) {
+//        cout << "Error in opening file '" + filename + "'" + "\n";
+//    }
     T object;
     while (file.read((char *) &object, sizeof(object))) {
         Model<T>::objectList.insert(pair<int, T>(object.id, object));
@@ -118,6 +120,11 @@ void Model<T>::readFromFile(const string &filename) {
 template<class T>
 int Model<T>::getId() const {
     return id;
+}
+
+template<class T>
+void Model<T>::setId(int id) {
+    Model::id = id;
 }
 
 
