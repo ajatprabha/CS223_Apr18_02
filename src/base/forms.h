@@ -5,6 +5,7 @@
 #ifndef CLASSROOMBOOKINGSYSTEM_FORMS_H
 #define CLASSROOMBOOKINGSYSTEM_FORMS_H
 
+#include <iostream>
 #include <vector>
 #include <string>
 #include <users/models.h>
@@ -23,6 +24,8 @@ public:
     void addError(const string &error);
 
     virtual void clean() = 0;
+
+    void printErrors();
 };
 
 template<class T>

@@ -16,3 +16,9 @@ bool Form::isValid() {
 void Form::addError(const string &error) {
     errors.push_back(error);
 }
+
+void Form::printErrors() {
+    for (auto &error : getErrors()) {
+        cout << error << endl;
+    }
+}
