@@ -36,3 +36,14 @@ void View::callAction(int menuPosition) {
 void View::exit() {
     response->view = nullptr;
 }
+
+int Input::getInt() {
+    int number;
+    cin >> number;
+    while (cin.fail()) {
+        cin.clear();
+        cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+        cin >> number;
+    }
+    return number;
+}

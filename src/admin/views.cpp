@@ -12,16 +12,12 @@ void AdminDetailView::display() {
 void AdminPanelView::display() {
     cout << "Admin: " << context.user->getFullName() << endl;
     populateMenu();
-    int choice;
-    cin >> choice;
-    callAction(choice - 1);
+    callAction(Input::getInt() - 1);
 }
 
 void AdminPanelView::deleteUser() {
     cout << "Enter the ID of user to delete:\n";
-    int id;
-    cin >> id;
-    AdminDeleteView().call({Application::getInstance().getCurrentUser(), id});
+    AdminDeleteView().call({Application::getInstance().getCurrentUser(), Input::getInt()});
     response->view = Controller::getInstance().getView("admin-panel");
 }
 

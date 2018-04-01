@@ -53,9 +53,7 @@ BaseUser *Application::getCurrentUser() {
 
 void SplashView::display() {
     populateMenu();
-    int choice;
-    cin >> choice;
-    callAction(choice - 1);
+    callAction(Input::getInt() - 1);
 }
 
 void SplashView::callLoginView() {

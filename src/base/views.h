@@ -6,6 +6,7 @@
 #define CLASSROOMBOOKINGSYSTEM_VIEWS_H
 
 #include <iostream>
+#include <limits>
 #include "models.h"
 #include "exceptions.h"
 #include "mixins.h"
@@ -29,6 +30,10 @@ struct Context {
 
 struct Response;
 
+class Input {
+public:
+    static int getInt();
+};
 
 class View {
 protected:
