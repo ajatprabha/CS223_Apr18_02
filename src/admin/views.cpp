@@ -47,9 +47,7 @@ void AdminCreateView::display() {
         BaseUser user = form->save();
         cout << "New admin saved successfully.\n";
     } else {
-        for (auto &error : form->getErrors()) {
-            cout << error << endl;
-        }
+        form->printErrors();
     }
     response->view = Controller::getInstance().getView("admin-panel");
 }
