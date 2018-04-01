@@ -9,20 +9,6 @@
 #include "../base/views.h"
 #include "forms.h"
 
-class AdminDetailView : public DetailView<BaseUser> {
-public:
-    AdminDetailView() = default;
-
-    void display() override;
-};
-
-class AdminCreateView : public CreateView<BaseUser> {
-public:
-    AdminCreateView() = default;
-
-    void display() override;
-};
-
 class AdminPanelView : public View {
 public:
     AdminPanelView() : View("\tAdmin panel\n\tHere you can perform the following actions.\n",
@@ -34,6 +20,16 @@ public:
     static void deleteUser();
 
     static void createAdmin();
+};
+
+class AdminCreateView : public CreateView<BaseUser> {
+public:
+    void display() override;
+};
+
+class AdminDetailView : public DetailView<BaseUser> {
+public:
+    void display() override;
 };
 
 class AdminDeleteView : public DeleteView<BaseUser> {
