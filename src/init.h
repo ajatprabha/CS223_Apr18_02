@@ -9,6 +9,7 @@
 #include <base/views.h>
 #include "users/models.h"
 #include "controller.h"
+#include "admin/views.h"
 
 using namespace std;
 

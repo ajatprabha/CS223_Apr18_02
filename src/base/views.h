@@ -35,7 +35,7 @@ protected:
     Context context{};
     static Response *response;
     string title;
-    vector<string> menuOptions;
+    vector<string> menuOptions{};
     vector<FnPtr> menuActions = {};
 
     View(const string &passedTitle, const vector<string> &passedVector, const vector<FnPtr> &passedActions);
@@ -79,6 +79,15 @@ public:
     void display() override;
 };
 
+template<class T>
+void DeleteView<T>::display() {
+    T *object = SingleObjectMixin<T>::getObject(context.requestObjectId);
+    if (object) {
+        object->remove();
+    }
+    cout << "Successfully deleted.\n";
+}
+
 class LoginView : public View {
 public:
     LoginView() : View("Enter your credentials to login to the system\n", {}, {}) {}
@@ -95,38 +104,5 @@ public:
 
     static void callLoginView();
 };
-
-class AdminDetailView : public DetailView<BaseUser> {
-public:
-    AdminDetailView() = default;
-
-    void display() override;
-};
-
-class AdminCreateView : public CreateView<BaseUser> {
-public:
-    AdminCreateView() = default;
-
-    void display() override;
-};
-
-class AdminPanelView : public View {
-public:
-    AdminPanelView() : View("\tAdmin panel\n\tHere you can perform the following actions.\n",
-                            {"Create new admin", "Delete admin/professor", "Exit"},
-                            {createAdmin, deleteUser, exit}) {}
-
-    void display() override;
-
-    static void deleteUser();
-
-    static void createAdmin();
-};
-
-class AdminDeleteView : public DeleteView<BaseUser> {
-public:
-    void display() final;
-};
-
 
 #endif //CLASSROOMBOOKINGSYSTEM_VIEWS_H

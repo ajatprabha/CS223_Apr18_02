@@ -31,15 +31,4 @@ public:
     virtual T &save() = 0;
 };
 
-class AdminCreateForm : public ModelForm<BaseUser> {
-    string firstName, lastName, email, password;
-public:
-    AdminCreateForm(const string &passedFirstName, const string &passedLastName, const string &passedEmail,
-                    const string &passedPassword);
-
-    void clean() override;
-
-    BaseUser &save() override;
-};
-
 #endif //CLASSROOMBOOKINGSYSTEM_FORMS_H
