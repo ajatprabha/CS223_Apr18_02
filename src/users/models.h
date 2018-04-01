@@ -44,7 +44,10 @@ public:
 };
 
 class Admin : public BaseUser {
-
+public:
+    Admin(const string &passedFirstName, const string &passedLastName, const string &passedEmail,
+          const string &passedPassword) : BaseUser(passedFirstName, passedLastName, passedEmail,
+                                                                     passedPassword, true) {}
 };
 
 class Professor : public BaseUser {

@@ -92,6 +92,10 @@ void AdminPanelView::deleteUser() {
     response->view = Controller::getInstance().getView("admin-panel");
 }
 
+void AdminPanelView::createAdmin() {
+    response->view = Controller::getInstance().getView("admin-create");
+}
+
 void AdminDeleteView::display() {
     DeleteView::display();
 }
@@ -99,4 +103,15 @@ void AdminDeleteView::display() {
 Context::Context(const BaseUser &passedUser, int passedRequestObjectId) {
     user = passedUser;
     requestObjectId = passedRequestObjectId;
+}
+
+void AdminCreateView::display() {
+    cout << "To create a new admin fill in the details asked below: \n";
+    string firstName, lastName, email, password;
+    cout << "Enter first name, last name, email and password respectively.\n";
+    cin >> firstName >> lastName >> email >> password;
+    Admin temp(firstName, lastName, email, password);
+    temp.save();
+    cout << "New admin saved successfully.\n";
+    response->view = Controller::getInstance().getView("admin-panel");
 }

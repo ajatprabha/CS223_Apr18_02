@@ -59,6 +59,12 @@ struct Response {
 };
 
 template<class T>
+class CreateView : public View {
+public:
+    void display() override = 0;
+};
+
+template<class T>
 class DetailView : public SingleObjectMixin<T>, public View {
 public:
     DetailView() = default;
@@ -94,14 +100,24 @@ public:
     void display() override;
 };
 
+class AdminCreateView : public CreateView<BaseUser> {
+public:
+    AdminCreateView() = default;
+
+    void display() override;
+};
+
 class AdminPanelView : public View {
 public:
-    AdminPanelView() : View("\tAdmin panel\n\tHere you can perform the following actions.\n", {"Delete user", "Exit"},
-                            {deleteUser, exit}) {}
+    AdminPanelView() : View("\tAdmin panel\n\tHere you can perform the following actions.\n",
+                            {"Create new admin", "Delete admin/professor", "Exit"},
+                            {createAdmin, deleteUser, exit}) {}
 
     void display() override;
 
     static void deleteUser();
+
+    static void createAdmin();
 };
 
 class AdminDeleteView : public DeleteView<BaseUser> {
