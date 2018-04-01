@@ -114,6 +114,7 @@ void Model<T>::readFromFile(const string &filename) {
     }
     file.close();
 }
+
 template<class T>
 int Model<T>::getId() const {
     return id;

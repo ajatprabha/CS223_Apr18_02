@@ -1,6 +1,5 @@
 project(CBS_Tests)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
-
-add_executable(TESTS base_tests/ModelTests.cpp)
-
+add_executable(TESTS base_tests/ModelTests.cpp base_tests/FormTests.cpp)
+include_directories(../src)
 target_link_libraries(TESTS gtest gtest_main)
