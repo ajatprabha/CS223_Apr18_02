@@ -91,9 +91,9 @@ bool Model<T>::operator!=(const Model &rhs) const {
 template<class T>
 void Model<T>::writeToFile(const string &filename) {
     fstream file;
-    file.open(filename, ios::out | ios::binary);
+    file.open(filename, ios::out | ios::trunc | ios::binary);
     if (!file) {
-        cout << "Error in creating file '" + filename << "'" << endl;
+        cout << "Error in creating file '" + filename + "'" + "\n";
     }
     for (auto &i : Model<T>::objectList) {
         file.write((char *) &(i.second), sizeof(i.second));
@@ -104,11 +104,9 @@ void Model<T>::writeToFile(const string &filename) {
 template<class T>
 void Model<T>::readFromFile(const string &filename) {
     fstream file;
-    file.open(filename, ios::in | ios::binary);
+    file.open(filename, ios::in | ios::out | ios::binary);
     if (!file) {
-        file.open(filename, ios::out | ios::binary);
-        file.close();
-        file.open(filename, ios::in | ios::binary);
+        cout << "Error in opening file '" + filename + "'" + "\n";
     }
     T object;
     while (file.read((char *) &object, sizeof(object))) {

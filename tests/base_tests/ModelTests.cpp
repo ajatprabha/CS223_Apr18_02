@@ -51,7 +51,6 @@ TEST_F(ModelTestFixture, testFindByIdAfterRemove){
     object.save();
     int temp = object.getId();
     object.remove();
-    std::cout<<Mock::findById(temp)<<endl;
     ASSERT_EQ(nullptr, Mock::findById(temp));
 }
 
