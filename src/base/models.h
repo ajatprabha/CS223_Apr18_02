@@ -6,6 +6,8 @@
 #define CLASSROOMBOOKINGSYSTEM_MODELS_H
 
 #include <map>
+#include <fstream>
+#include "exceptions.h"
 
 using namespace std;
 
@@ -29,6 +31,10 @@ public:
     bool operator==(const Model &rhs) const;
 
     bool operator!=(const Model &rhs) const;
+
+    static void writeToFile(const string &filename);
+
+    static void readFromFile(const string &filename);
 };
 
 template<class T>
@@ -80,5 +86,31 @@ bool Model<T>::operator!=(const Model &rhs) const {
     return !(rhs == *this);
 }
 
+template<class T>
+void Model<T>::writeToFile(const string &filename) {
+    fstream file;
+    file.open(filename, ios::out | ios::binary);
+    if (!file) {
+        cout << "Error in creating file '" + filename << "'" << endl;
+    }
+    for (auto &i : Model<T>::objectList) {
+        file.write((char *) &(i.second), sizeof(i.second));
+    }
+    file.close();
+}
+
+template<class T>
+void Model<T>::readFromFile(const string &filename) {
+    fstream file;
+    file.open(filename,ios::in|ios::binary);
+    if(!file){
+        cout << "Error in creating file '" + filename << "'" << endl;
+    }
+    T object;
+    while (file.read((char*) &object,sizeof(object))){
+        Model<T>::objectList.insert(pair<int, T>(object.id, object));
+    }
+    file.close();
+}
 
 #endif //CLASSROOMBOOKINGSYSTEM_MODELS_H

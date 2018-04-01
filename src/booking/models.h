@@ -5,16 +5,33 @@
 #ifndef CLASSROOMBOOKINGSYSTEM_BOOKING_MODELS_H
 #define CLASSROOMBOOKINGSYSTEM_BOOKING_MODELS_H
 
+#include <cstring>
 #include "../users/models.h"
 #include "../base/models.h"
 
+struct DateTime {
+    DateTime(int date, int month, int year, int hour, int minute, int second, char meridy);
+
+    int date;
+    int month;
+    int year;
+    int hour;
+    int minute;
+    int second;
+    char meridy = 'A';
+
+    string getTimestamp();
+};
+
 class Room : public Model<Room> {
 private:
-    int roomNumber;
-    int strength;
-    bool audio;
-    bool video;
+    int roomNumber = 0;
+    int strength = 0;
+    bool audio = false;
+    bool video = false;
 public:
+    Room() = default;
+
     Room(int roomNumber, int strength, bool audio, bool video);
 
     int getRoomNumber() const;
@@ -37,14 +54,13 @@ class Slot : public Model<Slot> {
 private:
     Professor requestedBy;
     Room room;
-    string startTime;
-    string endTime;
-    string reason;
-    string date;
+    DateTime startTime;
+    DateTime endTime;
+    char reason[2048];
     int approved = 0;
 public:
-    Slot(const Professor &requestedBy, const Room &room, const string &startTime, const string &endTime,
-         const string &reason, const string &date, int approved = 0);
+    Slot(const Professor &requestedBy, const Room &room, const DateTime &startTime, const DateTime &endTime,
+         char *reason, int approved);
 };
 
 

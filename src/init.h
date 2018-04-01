@@ -33,6 +33,10 @@ public:
     void loadViewPatterns();
 
     BaseUser *getCurrentUser();
+
+    static void saveData();
+
+    static void readData();
 };
 
 class SplashView : public View {

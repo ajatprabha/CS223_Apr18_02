@@ -2,6 +2,7 @@
 // Created by ajatprabha on 12/3/18.
 //
 
+#include <booking/models.h>
 #include "init.h"
 
 Application *Application::instance = nullptr;
@@ -17,8 +18,9 @@ Application &Application::getInstance() {
 
 void Application::start() {
     // Initialise all the static properties
+    readData();
     loadViewPatterns();
-    BaseUser("Ajat", "Prabha", "admin@email.com", "password", true).save();
+//    BaseUser("Ajat", "Prabha", "admin@email.com", "password", true).save();
     this->view = controller.getView("splash");
     while (this->view) {
         Context tmp(this->user, -1);
@@ -49,6 +51,14 @@ void Application::loadViewPatterns() {
 
 BaseUser *Application::getCurrentUser() {
     return user;
+}
+
+void Application::saveData() {
+    BaseUser::writeToFile("BaseUser.dat");
+}
+
+void Application::readData() {
+    BaseUser::readFromFile("BaseUser.dat");
 }
 
 void SplashView::display() {

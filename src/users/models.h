@@ -11,14 +11,13 @@ class BaseUser : public Model<BaseUser> {
 private:
     char firstName[32]{};
     char lastName[64]{};
-    char password[64]{};
     char email[64]{};
+    char password[64]{};
     bool admin = false;
 public:
     BaseUser() = default;
 
-    BaseUser(const string &passedFirstName, const string &passedLastName, const string &passedEmail,
-             const string &passedPassword, bool passedAdmin);
+    BaseUser(const char *firstName, const char *lastName, const char *email, const char *password, bool admin);
 
     bool isAdmin();
 
@@ -46,15 +45,15 @@ public:
 class Admin : public BaseUser {
 public:
     Admin(const string &passedFirstName, const string &passedLastName, const string &passedEmail,
-          const string &passedPassword) : BaseUser(passedFirstName, passedLastName, passedEmail,
-                                                   passedPassword, true) {}
+          const string &passedPassword) : BaseUser(passedFirstName.c_str(), passedLastName.c_str(), passedEmail.c_str(),
+                                                   passedPassword.c_str(), true) {}
 };
 
 class Professor : public BaseUser {
 public:
     Professor(const string &passedFirstName, const string &passedLastName, const string &passedEmail,
-              const string &passedPassword) : BaseUser(passedFirstName, passedLastName, passedEmail,
-                                                       passedPassword, false) {}
+              const string &passedPassword) : BaseUser(passedFirstName.c_str(), passedLastName.c_str(),
+                                                       passedEmail.c_str(), passedPassword.c_str(), false) {}
 };
 
 #endif //CLASSROOMBOOKINGSYSTEM_USER_MODELS_H

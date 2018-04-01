@@ -2,6 +2,7 @@
 // Created by ajatprabha on 12/3/18.
 //
 
+#include "../init.h"
 #include "views.h"
 
 Response *View::response = nullptr;
@@ -34,6 +35,7 @@ void View::callAction(int menuPosition) {
 }
 
 void View::exit() {
+    Application::saveData();
     response->view = nullptr;
 }
 

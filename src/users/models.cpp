@@ -2,6 +2,7 @@
 // Created by ajatprabha on 12/3/18.
 //
 
+#include <cstring>
 #include "models.h"
 
 bool BaseUser::isAdmin() {
@@ -65,11 +66,10 @@ BaseUser *BaseUser::findByEmail(const string &_email) {
     return nullptr;
 }
 
-BaseUser::BaseUser(const string &passedFirstName, const string &passedLastName, const string &passedEmail,
-                   const string &passedPassword, bool passedAdmin) {
-    setFirstName(passedFirstName);
-    setLastName(passedLastName);
-    setEmail(passedEmail);
-    setPassword(passedPassword);
-    admin = passedAdmin;
+BaseUser::BaseUser(const char *passedFirstName, const char *passedLastName, const char *passedEmail,
+                   const char *passedPassword, bool passedAdmin) : admin(passedAdmin) {
+    strcpy(firstName, passedFirstName);
+    strcpy(lastName, passedLastName);
+    strcpy(password, passedPassword);
+    strcpy(email, passedEmail);
 }
