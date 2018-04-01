@@ -25,6 +25,10 @@ public:
     virtual bool remove();
 
     static T *findById(int id);
+
+    bool operator==(const Model &rhs) const;
+
+    bool operator!=(const Model &rhs) const;
 };
 
 template<class T>
@@ -64,6 +68,16 @@ T *Model<T>::findById(int id) {
         return &(dynamic_cast<T &> (it->second));
     }
     return nullptr;
+}
+
+template<class T>
+bool Model<T>::operator==(const Model &rhs) const {
+    return id == rhs.id;
+}
+
+template<class T>
+bool Model<T>::operator!=(const Model &rhs) const {
+    return !(rhs == *this);
 }
 
 

@@ -21,12 +21,12 @@ public:
     ModelTestFixture() : Test() {}
 };
 
-TEST_F(ModelTestFixture, test_size_zero_without_save) {
+TEST_F(ModelTestFixture, testSizeZeroWithoutSave) {
     Mock object = Mock();
     ASSERT_EQ(Mock::all().size(), 0);
 }
 
-TEST_F(ModelTestFixture, test_size_zero_after_save_and_delete) {
+TEST_F(ModelTestFixture, testSizeZeroAfterSaveAndDelete) {
     Mock object = Mock();
     object.save();
     ASSERT_EQ(Mock::all().size(), 1);
@@ -34,8 +34,15 @@ TEST_F(ModelTestFixture, test_size_zero_after_save_and_delete) {
     ASSERT_EQ(Mock::all().size(), 0);
 }
 
-TEST_F(ModelTestFixture, test_size_one_with_save) {
+TEST_F(ModelTestFixture, testSizeOneWithSave) {
     Mock object = Mock();
     object.save();
     ASSERT_EQ(Mock::all().size(), 1);
 }
+
+TEST_F(ModelTestFixture, testFindById){
+    Mock object = Mock();
+    object.save();
+    ASSERT_EQ(object, *Mock::findById(1));
+}
+
