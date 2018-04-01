@@ -1,0 +1,14 @@
+//
+// Created by ajatprabha on 1/4/18.
+//
+
+#ifndef CLASSROOMBOOKINGSYSTEM_BOOKING_VIEWS_H
+#define CLASSROOMBOOKINGSYSTEM_BOOKING_VIEWS_H
+
+
+class views {
+
+};
+
+
+#endif //CLASSROOMBOOKINGSYSTEM_BOOKING_VIEWS_H
