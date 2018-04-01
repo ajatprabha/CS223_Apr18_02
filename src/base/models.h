@@ -29,6 +29,8 @@ public:
     bool operator==(const Model &rhs) const;
 
     bool operator!=(const Model &rhs) const;
+
+    int getId() const;
 };
 
 template<class T>
@@ -78,6 +80,11 @@ bool Model<T>::operator==(const Model &rhs) const {
 template<class T>
 bool Model<T>::operator!=(const Model &rhs) const {
     return !(rhs == *this);
+}
+
+template<class T>
+int Model<T>::getId() const {
+    return id;
 }
 
 

@@ -40,9 +40,18 @@ TEST_F(ModelTestFixture, testSizeOneWithSave) {
     ASSERT_EQ(Mock::all().size(), 1);
 }
 
-TEST_F(ModelTestFixture, testFindById){
+TEST_F(ModelTestFixture, testFindById) {
     Mock object = Mock();
     object.save();
-    ASSERT_EQ(object, *Mock::findById(1));
+    ASSERT_EQ(object, *Mock::findById(object.getId()));
+}
+
+TEST_F(ModelTestFixture, testFindByIdAfterRemove){
+    Mock object = Mock();
+    object.save();
+    int temp = object.getId();
+    object.remove();
+    std::cout<<Mock::findById(temp)<<endl;
+    ASSERT_EQ(nullptr, Mock::findById(temp));
 }
 
