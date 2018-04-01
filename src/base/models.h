@@ -32,6 +32,8 @@ public:
 
     bool operator!=(const Model &rhs) const;
 
+    int getId() const;
+
     static void writeToFile(const string &filename);
 
     static void readFromFile(const string &filename);
@@ -112,5 +114,10 @@ void Model<T>::readFromFile(const string &filename) {
     }
     file.close();
 }
+template<class T>
+int Model<T>::getId() const {
+    return id;
+}
+
 
 #endif //CLASSROOMBOOKINGSYSTEM_MODELS_H
