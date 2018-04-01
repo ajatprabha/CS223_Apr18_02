@@ -12,19 +12,14 @@
 class AdminPanelView : public View {
 public:
     AdminPanelView() : View("Admin panel\nYou can perform the following actions.\n",
-                            {"Create new admin", "Delete admin/professor", "Exit"},
-                            {createAdmin, deleteUser, exit}) {}
+                            {"Create new user", "Delete admin/professor", "Exit"},
+                            {createUser, deleteUser, exit}) {}
 
     void display() override;
 
     static void deleteUser();
 
-    static void createAdmin();
-};
-
-class AdminCreateView : public CreateView<BaseUser> {
-public:
-    void display() override;
+    static void createUser();
 };
 
 class AdminDetailView : public DetailView<BaseUser> {

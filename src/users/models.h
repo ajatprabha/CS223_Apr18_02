@@ -47,11 +47,14 @@ class Admin : public BaseUser {
 public:
     Admin(const string &passedFirstName, const string &passedLastName, const string &passedEmail,
           const string &passedPassword) : BaseUser(passedFirstName, passedLastName, passedEmail,
-                                                                     passedPassword, true) {}
+                                                   passedPassword, true) {}
 };
 
 class Professor : public BaseUser {
-
+public:
+    Professor(const string &passedFirstName, const string &passedLastName, const string &passedEmail,
+              const string &passedPassword) : BaseUser(passedFirstName, passedLastName, passedEmail,
+                                                       passedPassword, false) {}
 };
 
 #endif //CLASSROOMBOOKINGSYSTEM_USER_MODELS_H

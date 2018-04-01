@@ -15,5 +15,10 @@ public:
     void display() override;
 };
 
+class UserCreateView : public CreateView<BaseUser> {
+public:
+    void display() override;
+};
+
 
 #endif //CLASSROOMBOOKINGSYSTEM_VIEWS_H

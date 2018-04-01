@@ -4,15 +4,16 @@
 
 #include "forms.h"
 
-AdminCreateForm::AdminCreateForm(const string &passedFirstName, const string &passedLastName, const string &passedEmail,
-                                 const string &passedPassword) {
+UserCreateForm::UserCreateForm(const string &passedFirstName, const string &passedLastName, const string &passedEmail,
+                                 const string &passedPassword, bool passedAdmin) {
     firstName = passedFirstName;
     lastName = passedLastName;
     email = passedEmail;
     password = passedPassword;
+    adminStatus = passedAdmin;
 }
 
-void AdminCreateForm::clean() {
+void UserCreateForm::clean() {
     if (firstName.empty() || firstName.size() > 32) addError("invalid first name length");
     if (lastName.empty() || lastName.size() > 64) addError("invalid last name length");
     if (email.empty() || email.size() > 64) addError("invalid first name length");
@@ -22,8 +23,13 @@ void AdminCreateForm::clean() {
     if (password.empty() || password.size() > 64) addError("invalid password length");
 }
 
-BaseUser &AdminCreateForm::save() {
-    auto *temp = new Admin(firstName, lastName, email, password);
+BaseUser &UserCreateForm::save() {
+    BaseUser *temp;
+    if (adminStatus) {
+        temp = new Admin(firstName, lastName, email, password);
+    } else {
+        temp = new Professor(firstName, lastName, email, password);
+    }
     temp->save();
     return *temp;
 }

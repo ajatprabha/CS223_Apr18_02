@@ -21,8 +21,8 @@ void AdminPanelView::deleteUser() {
     response->view = Controller::getInstance().getView("admin-panel");
 }
 
-void AdminPanelView::createAdmin() {
-    response->view = Controller::getInstance().getView("admin-create");
+void AdminPanelView::createUser() {
+    response->view = Controller::getInstance().getView("create-user");
 }
 
 void AdminDeleteView::display() {
@@ -32,19 +32,4 @@ void AdminDeleteView::display() {
 Context::Context(BaseUser *passedUser, int passedRequestObjectId) {
     user = passedUser;
     requestObjectId = passedRequestObjectId;
-}
-
-void AdminCreateView::display() {
-    cout << "To create a new admin fill in the details asked below: \n";
-    string firstName, lastName, email, password;
-    cout << "Enter first name, last name, email and password respectively.\n";
-    cin >> firstName >> lastName >> email >> password;
-    form = new AdminCreateForm(firstName, lastName, email, password);
-    if (form->isValid()) {
-        BaseUser user = form->save();
-        cout << "New admin saved successfully.\n";
-    } else {
-        form->printErrors();
-    }
-    response->view = Controller::getInstance().getView("admin-panel");
 }
