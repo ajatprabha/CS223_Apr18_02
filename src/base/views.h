@@ -88,13 +88,6 @@ void DeleteView<T>::display() {
     cout << "Successfully deleted.\n";
 }
 
-class LoginView : public View {
-public:
-    LoginView() : View("Enter your credentials to login to the system\n", {}, {}) {}
-
-    void display() override;
-};
-
 class SplashView : public View {
 public:
     SplashView() : View("Welcome to ClassRoomBooking system\nChoose from the options below\n", {"Login", "Exit"},

@@ -28,7 +28,10 @@ View::View(const string &passedTitle, const vector<string> &passedVector, const 
 }
 
 void View::callAction(int menuPosition) {
-    menuActions[menuPosition]();
+    if (menuPosition >= menuActions.size()) {
+        response->view = this;
+        cout << "Invalid choice, try again!\n";
+    } else menuActions[menuPosition]();
 }
 
 void View::exit() {
@@ -44,21 +47,4 @@ void SplashView::display() {
 
 void SplashView::callLoginView() {
     response->view = Controller::getInstance().getView("login");
-}
-
-void LoginView::display() {
-    populateMenu();
-    string email, password;
-    cout << "Enter your email and password\n";
-    cin >> email >> password;
-    Application appInstance = Application::getInstance();
-    if (appInstance.login(email, password)) {
-        Controller controller = Controller::getInstance();
-        if (appInstance.getCurrentUser()->isAdmin()) {
-            response->view = controller.getView("admin-panel");
-        }
-    } else {
-        response->view = nullptr;
-        cout << "Invalid credentials\n";
-    }
 }

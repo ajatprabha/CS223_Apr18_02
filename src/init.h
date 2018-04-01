@@ -10,6 +10,7 @@
 #include "users/models.h"
 #include "controller.h"
 #include "admin/views.h"
+#include "users/views.h"
 
 using namespace std;
 
