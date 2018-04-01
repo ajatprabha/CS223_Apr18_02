@@ -20,7 +20,7 @@ void Application::start() {
     // Initialise all the static properties
     readData();
     loadViewPatterns();
-//    BaseUser("Ajat", "Prabha", "admin@email.com", "password", true).save();
+    Admin("Admin", "user", "admin@iitj.ac.in", "admin@123").save();     // creates a permanent admin
     this->view = controller.getView("splash");
     while (this->view) {
         Context tmp(this->user, -1);
@@ -55,10 +55,18 @@ BaseUser *Application::getCurrentUser() {
 
 void Application::saveData() {
     BaseUser::writeToFile("BaseUser.dat");
+    Professor::writeToFile("Professor.dat");
+    Admin::writeToFile("Admin.dat");
+    Room::writeToFile("Room.dat");
+    Slot::writeToFile("Slot.dat");
 }
 
 void Application::readData() {
     BaseUser::readFromFile("BaseUser.dat");
+    Professor::readFromFile("Professor.dat");
+    Admin::readFromFile("Admin.dat");
+    Room::readFromFile("Room.dat");
+    Slot::readFromFile("Slot.dat");
 }
 
 void SplashView::display() {

@@ -10,14 +10,16 @@
 #include "../base/models.h"
 
 struct DateTime {
+    DateTime() = default;
+
     DateTime(int date, int month, int year, int hour, int minute, int second, char meridy);
 
-    int date;
-    int month;
-    int year;
-    int hour;
-    int minute;
-    int second;
+    int date{};
+    int month{};
+    int year{};
+    int hour{};
+    int minute{};
+    int second{};
     char meridy = 'A';
 
     string getTimestamp();
@@ -56,9 +58,11 @@ private:
     Room room;
     DateTime startTime;
     DateTime endTime;
-    char reason[2048];
+    char reason[2048]{};
     int approved = 0;
 public:
+    Slot() = default;
+
     Slot(const Professor &requestedBy, const Room &room, const DateTime &startTime, const DateTime &endTime,
          char *reason, int approved);
 };

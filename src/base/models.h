@@ -104,12 +104,14 @@ void Model<T>::writeToFile(const string &filename) {
 template<class T>
 void Model<T>::readFromFile(const string &filename) {
     fstream file;
-    file.open(filename,ios::in|ios::binary);
-    if(!file){
-        cout << "Error in creating file '" + filename << "'" << endl;
+    file.open(filename, ios::in | ios::binary);
+    if (!file) {
+        file.open(filename, ios::out | ios::binary);
+        file.close();
+        file.open(filename, ios::in | ios::binary);
     }
     T object;
-    while (file.read((char*) &object,sizeof(object))){
+    while (file.read((char *) &object, sizeof(object))) {
         Model<T>::objectList.insert(pair<int, T>(object.id, object));
     }
     file.close();
