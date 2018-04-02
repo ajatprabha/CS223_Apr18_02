@@ -30,6 +30,8 @@ public:
 
     bool login(const string &_email, const string &_password);
 
+    void logout();
+
     void loadViewPatterns();
 
     BaseUser *getCurrentUser();

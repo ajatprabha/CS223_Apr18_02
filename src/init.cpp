@@ -70,6 +70,10 @@ void Application::readData() {
     Slot::readFromFile("Slot.dat");
 }
 
+void Application::logout() {
+    user = nullptr;
+}
+
 void SplashView::display() {
     populateMenu();
     callAction(Input::getInt() - 1);

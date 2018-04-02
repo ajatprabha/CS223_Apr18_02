@@ -2,11 +2,12 @@
 // Created by ajatprabha on 1/4/18.
 //
 
+#include <init.h>
 #include "forms.h"
 
 UserCreateUpdateForm::UserCreateUpdateForm(const string &passedFirstName, const string &passedLastName,
-                               const string &passedEmail, const string &passedPassword, bool passedAdmin,
-                               BaseUser *passedInstance) {
+                                           const string &passedEmail, const string &passedPassword, bool passedAdmin,
+                                           BaseUser *passedInstance) {
     firstName = passedFirstName;
     lastName = passedLastName;
     email = passedEmail;
@@ -27,6 +28,7 @@ void UserCreateUpdateForm::clean() {
 
 BaseUser &UserCreateUpdateForm::save() {
     BaseUser *temp;
+    bool loginUser = false;
     int id;
     if (instance) {
         id = instance->getId();
@@ -37,7 +39,14 @@ BaseUser &UserCreateUpdateForm::save() {
     } else {
         temp = new Professor(firstName, lastName, email, password);
     }
-    if (instance) temp->setId(id);
+    if (instance) {
+        if (instance == Application::getInstance().getCurrentUser()) {
+            loginUser = true;
+            Application::getInstance().logout();
+        }
+        temp->setId(id);
+    }
     temp->save();
+    if (loginUser) Application::getInstance().login(temp->getEmail(), password);
     return *temp;
 }
