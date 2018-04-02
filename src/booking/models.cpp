@@ -53,6 +53,30 @@ string DateTime::getTimestamp() const {
     return str + " " + mer;
 }
 
+void DateTime::inputValidate() {
+    cout<<"Enter the Time in dd mm yy hh mm ss A/P format"<<endl;
+    //validate and keep looping till verified that time is correct
+    cin>>date>>month>>year>>hour>>minute>>second>>meridy;
+
+    value = year*10000000000000+month*10000000000+date*10000000+hour*10000+minute*100+second;
+}
+
+bool DateTime::operator<(DateTime obj) {
+    return value < obj.value;
+}
+
+bool DateTime::operator>(DateTime obj) {
+    return value > obj.value;
+}
+
+bool DateTime::operator>=(DateTime obj) {
+    return value >= obj.value;
+}
+
+bool DateTime::operator<=(DateTime obj) {
+    return value <= obj.value;
+}
+
 Slot::Slot(const Professor &requestedBy, const Room &room, const DateTime &startTime, const DateTime &endTime,
            char *passedReason, int approved) : requestedBy(requestedBy), room(room), startTime(startTime),
                                                endTime(endTime), approved(approved) {

@@ -3,6 +3,7 @@
 //
 
 #include <booking/models.h>
+#include <faculty/views.h>
 #include "init.h"
 
 Application *Application::instance = nullptr;
@@ -49,6 +50,7 @@ void Application::loadViewPatterns() {
     controller.addViewPattern("admin-detail", new AdminDetailView);
     controller.addViewPattern("admin-delete", new DeleteUserView);
     controller.addViewPattern("admin-unseen-slot-list", new UnseenSlotRequestListView);
+    controller.addViewPattern("faculty-panel", new FacultyPanelView);
 }
 
 BaseUser *Application::getCurrentUser() {

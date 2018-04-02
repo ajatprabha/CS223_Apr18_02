@@ -21,8 +21,19 @@ struct DateTime {
     int minute{};
     int second{};
     char meridy = 'A';
+    long long value{};
 
     string getTimestamp() const;
+
+    void inputValidate();
+
+    bool operator<(DateTime obj);
+
+    bool operator>(DateTime obj);
+
+    bool operator>=(DateTime obj);
+
+    bool operator<=(DateTime obj);
 };
 
 class Room : public Model<Room> {

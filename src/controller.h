@@ -22,7 +22,6 @@ class Controller {
 private:
     static Controller *instance;
     static vector<ViewPattern> *views_list;
-
     Controller() = default;
 
 public:
