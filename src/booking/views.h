@@ -31,5 +31,27 @@ public:
 
 };
 
+class SlotNotificationListView : public ListView<Slot> {
+public:
+    vector<Slot> getQueryset() override;
+
+    void display() override;
+};
+
+class EmptyRoomListView : public ListView<Room> {
+private:
+    struct Parameters {
+        DateTime start, end;
+        bool audio = false, video = false;
+        int strength = 0;
+    }params;
+public:
+    vector<Room> getQueryset() override;
+
+    void display() override;
+
+    void getParams();
+};
+
 
 #endif //CLASSROOMBOOKINGSYSTEM_BOOKING_VIEWS_H

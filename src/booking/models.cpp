@@ -36,6 +36,13 @@ void Room::setVideo(bool video) {
     Room::video = video;
 }
 
+Room *Room::findByRoomId(int id) {
+    for (auto &item : Room::all()) {
+        if (item.second.getRoomNumber() == id) return &(item.second);
+    }
+    return nullptr;
+}
+
 DateTime::DateTime(int date, int month, int year, int hour, int minute, int second, char meridy) : date(date),
                                                                                                    month(month),
                                                                                                    year(year),

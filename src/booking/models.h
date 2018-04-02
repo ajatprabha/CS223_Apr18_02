@@ -60,6 +60,8 @@ public:
     void setAudio(bool audio);
 
     void setVideo(bool video);
+
+    static Room *findByRoomId(int id);
 };
 
 
