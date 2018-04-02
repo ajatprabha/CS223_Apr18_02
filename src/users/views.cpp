@@ -15,7 +15,7 @@ void LoginView::display() {
     if (appInstance.login(email, password)) {
         if (appInstance.getCurrentUser()->isAdmin()) {
             response->view = controller.getView("admin-panel");
-        }
+        } else response->view = controller.getView("faculty-panel");
     } else {
         response->view = controller.getView("splash");
         cout << "Invalid credentials\n";

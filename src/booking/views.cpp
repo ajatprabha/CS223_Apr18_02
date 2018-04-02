@@ -38,14 +38,6 @@ void FacultyPanelView::deleteSlot() {
 }
 
 void FacultyPanelView::listEmptyRooms() {
-
-    cout << "Enter the time slot (start and finish times) you want to check empty classrooms for" << endl;
-    DateTime start, finish;
-    start.inputValidate();
-    finish.inputValidate();
-    if (start < finish) {
-
-    }
     response->view = Controller::getInstance().getView("empty-rooms-list");
 }
 

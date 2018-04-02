@@ -12,7 +12,7 @@ class FacultyPanelView : public View {
 public:
     FacultyPanelView() : View("Faculty panel\nYou can perform the following actions.\n",
                               {"Update profile", "List empty rooms for a given time slot", "Book Slot",
-                               "Check Status of slots", "Update slot", "delete slot", "Exit"},
+                               "Check Status of slots", "Update slot", "Delete slot", "Exit"},
                               {updateUser, listEmptyRooms, bookSlot, listSlotStatus, updateSlot, deleteSlot, exit}) {}
 
     void display() override;
