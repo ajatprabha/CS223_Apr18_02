@@ -3,7 +3,7 @@
 //
 
 #include <booking/models.h>
-#include <faculty/views.h>
+#include <booking/views.h>
 #include "init.h"
 
 Application *Application::instance = nullptr;

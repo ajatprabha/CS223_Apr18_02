@@ -1,3 +1,3 @@
 project(CBS_SRC)
 
-add_executable(CBS main.cpp init.h init.cpp base/models.h base/models.cpp base/views.h base/views.cpp users/models.h users/models.cpp controller.h controller.cpp base/exceptions.cpp base/exceptions.h base/mixins.cpp base/mixins.h base/forms.cpp base/forms.h admin/views.cpp admin/views.h admin/forms.cpp admin/forms.h users/views.cpp users/views.h booking/views.cpp booking/views.h booking/models.cpp booking/models.h faculty/views.cpp faculty/views.h)
+add_executable(CBS main.cpp init.h init.cpp base/models.h base/models.cpp base/views.h base/views.cpp users/models.h users/models.cpp controller.h controller.cpp base/exceptions.cpp base/exceptions.h base/mixins.cpp base/mixins.h base/forms.cpp base/forms.h admin/views.cpp admin/views.h admin/forms.cpp admin/forms.h users/views.cpp users/views.h booking/views.cpp booking/views.h booking/models.cpp booking/models.h)
