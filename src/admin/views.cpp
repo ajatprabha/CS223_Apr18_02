@@ -141,3 +141,20 @@ void RoomUpdateView::display() {
     }
     response->view = Controller::getInstance().getView("admin-panel");
 }
+
+void RoomDetailView::display() {
+    cout << "Enter room number to get details for: \n";
+    int roomNumber = Input::getInt();
+    Room *room = Room::findByRoomId(roomNumber);
+    if (room) {
+        cout << "Details for room #" << room->getRoomNumber() << "\n\tStrength: " << room->getStrength()
+             << "\n\tAudio: ";
+        if (room->hasVideo()) cout << "Yes"; else cout << "No";
+        cout << "\n\tVideo: ";
+        if (room->hasVideo()) cout << "Yes"; else cout << "No";
+        cout << endl;
+    } else {
+        cout << "Room #" << roomNumber << " doesn't exist.\n";
+    }
+    response->view = Controller::getInstance().getView("admin-panel");
+}

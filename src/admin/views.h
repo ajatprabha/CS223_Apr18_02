@@ -60,6 +60,11 @@ public:
     void display() override;
 };
 
+class RoomDetailView : public DetailView<Room> {
+public:
+    void display() override;
+};
+
 class RoomUpdateView : public UpdateView<Room> {
 public:
     void display() override;
