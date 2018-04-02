@@ -21,7 +21,7 @@ public:
 
     bool isAdmin();
 
-    string getFullName();
+    string getFullName() const;
 
     void setPassword(const string &_password);
 

@@ -9,7 +9,7 @@ bool BaseUser::isAdmin() {
     return admin;
 }
 
-string BaseUser::getFullName() {
+string BaseUser::getFullName() const {
     return string(firstName) + " " + string(lastName);
 }
 
@@ -72,4 +72,6 @@ BaseUser::BaseUser(const char *passedFirstName, const char *passedLastName, cons
     strcpy(lastName, passedLastName);
     strcpy(password, passedPassword);
     strcpy(email, passedEmail);
+    BaseUser *user = BaseUser::findByEmail(passedEmail);
+    if(user) id = user->getId();
 }

@@ -14,7 +14,7 @@ using namespace std;
 
 template<class T>
 class Model {
-private:
+protected:
     int id;
     static map<int, T> objectList;
 public:
