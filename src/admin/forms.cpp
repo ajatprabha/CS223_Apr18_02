@@ -27,14 +27,17 @@ void UserCreateUpdateForm::clean() {
 
 BaseUser &UserCreateUpdateForm::save() {
     BaseUser *temp;
-    int id = instance->getId();
-    if (instance) instance->remove();
+    int id;
+    if (instance) {
+        id = instance->getId();
+        instance->remove();
+    }
     if (adminStatus) {
         temp = new Admin(firstName, lastName, email, password);
     } else {
         temp = new Professor(firstName, lastName, email, password);
     }
-    temp->setId(id);
+    if (instance) temp->setId(id);
     temp->save();
     return *temp;
 }

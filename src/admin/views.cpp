@@ -23,6 +23,9 @@ void AdminPanelView::deleteUser() {
     if (!user) {
         cout << "No user with this email exists.\n";
     } else {
+        if(Application::getInstance().getCurrentUser()->getEmail()==email)
+            cout<<"You cannot delete yourself!"<<endl;
+        else
         DeleteUserView().call({Application::getInstance().getCurrentUser(), user->getId()});
     }
     response->view = Controller::getInstance().getView("admin-panel");
