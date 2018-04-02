@@ -21,5 +21,17 @@ public:
     BaseUser &save() override;
 };
 
+class RoomCreateUpdateForm : public ModelForm<Room> {
+    int roomNumber, strength;
+    bool audio, video;
+public:
+
+    RoomCreateUpdateForm(int roomNumber, int strength, bool audio, bool video, Room *passedInstance = nullptr);
+
+    void clean() override;
+
+    Room &save() override;
+};
+
 
 #endif //CLASSROOMBOOKINGSYSTEM_ADMIN_FORMS_H

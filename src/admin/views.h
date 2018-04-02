@@ -13,8 +13,11 @@
 class AdminPanelView : public View {
 public:
     AdminPanelView() : View("Admin panel\nYou can perform the following actions.\n",
-                            {"Create new user", "Update existing user", "Delete admin/professor", "View slot requests", "Exit"},
-                            {createUser, updateUser, deleteUser, listUnseenSlots, exit}) {}
+                            {"View slot requests", "Create new user", "Update existing user", "Delete admin/professor",
+                             "Create new room", "Update existing room", "Delete room", "View room details",
+                             "Exit"},
+                            {listUnseenSlots, createUser, updateUser, deleteUser, createRoom, updateRoom, deleteRoom,
+                             roomDetails, exit}) {}
 
     void display() override;
 
@@ -23,6 +26,14 @@ public:
     static void createUser();
 
     static void updateUser();
+
+    static void createRoom();
+
+    static void updateRoom();
+
+    static void deleteRoom();
+
+    static void roomDetails();
 
     static void listUnseenSlots();
 };
@@ -35,12 +46,18 @@ public:
 class UnseenSlotRequestListView : public ListView<Slot> {
 public:
     vector<Slot> getQueryset() override;
+
     void display() override;
 };
 
 class DeleteUserView : public DeleteView<BaseUser> {
 public:
     void display() final;
+};
+
+class RoomCreateView : public CreateView<Room> {
+public:
+    void display() override;
 };
 
 
