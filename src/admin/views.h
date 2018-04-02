@@ -60,5 +60,10 @@ public:
     void display() override;
 };
 
+class RoomUpdateView : public UpdateView<Room> {
+public:
+    void display() override;
+};
+
 
 #endif //CLASSROOMBOOKINGSYSTEM_ADMIN_VIEWS_H

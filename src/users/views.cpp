@@ -50,13 +50,18 @@ void UserUpdateView::display() {
     cin >> firstName >> lastName >> password;
     cout << "Should this user be an admin? (y/n)\n";
     cin >> adminStatus;
-    form = new UserCreateUpdateForm(firstName, lastName, email, password, adminStatus == 'y',
-                                    BaseUser::findByEmail(email));
-    if (form->isValid()) {
-        BaseUser user = form->save();
-        cout << "User " + user.getFullName() + " updated successfully.\n";
+    BaseUser *user = BaseUser::findByEmail(email);
+    if (user) {
+        form = new UserCreateUpdateForm(firstName, lastName, email, password, adminStatus == 'y',
+                                        user);
+        if (form->isValid()) {
+            user = &form->save();
+            cout << "User " + user->getFullName() + " updated successfully.\n";
+        } else {
+            form->printErrors();
+        }
     } else {
-        form->printErrors();
+        cout << "A user with " + email + " email address doesn't exist.\n";
     }
     response->view = Controller::getInstance().getView("admin-panel");
 }
