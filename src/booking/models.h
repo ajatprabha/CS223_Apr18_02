@@ -22,7 +22,7 @@ struct DateTime {
     int second{};
     char meridy = 'A';
 
-    string getTimestamp();
+    string getTimestamp() const;
 };
 
 class Room : public Model<Room> {
@@ -65,6 +65,20 @@ public:
 
     Slot(const Professor &requestedBy, const Room &room, const DateTime &startTime, const DateTime &endTime,
          char *reason, int approved);
+
+    const Professor &getRequestedBy() const;
+
+    const Room &getRoom() const;
+
+    const DateTime &getStartTime() const;
+
+    const DateTime &getEndTime() const;
+
+    const char *getReason() const;
+
+    int getApproved() const;
+
+    void setApproved(int approved);
 };
 
 

@@ -48,6 +48,7 @@ void Application::loadViewPatterns() {
     controller.addViewPattern("admin-panel", new AdminPanelView);
     controller.addViewPattern("admin-detail", new AdminDetailView);
     controller.addViewPattern("admin-delete", new DeleteUserView);
+    controller.addViewPattern("admin-unseen-slot-list", new UnseenSlotRequestListView);
 }
 
 BaseUser *Application::getCurrentUser() {

@@ -87,6 +87,12 @@ public:
 };
 
 template<class T>
+class ListView : public MultipleObjectMixin<T>, public View {
+public:
+    ListView() = default;
+};
+
+template<class T>
 class DeleteView : public SingleObjectMixin<T>, public View {
 public:
     void display() override;

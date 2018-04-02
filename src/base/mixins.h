@@ -5,6 +5,7 @@
 #ifndef CLASSROOMBOOKINGSYSTEM_MIXINS_H
 #define CLASSROOMBOOKINGSYSTEM_MIXINS_H
 
+#include <vector>
 #include "models.h"
 
 template<class T>
@@ -13,6 +14,12 @@ protected:
     T *object = nullptr;
 public:
     static T *getObject(int passedId);
+};
+
+template<class T>
+class MultipleObjectMixin : public Model<T> {
+public:
+    virtual vector<T> getQueryset() = 0;
 };
 
 template<class T>

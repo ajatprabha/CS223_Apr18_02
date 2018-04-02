@@ -44,7 +44,7 @@ DateTime::DateTime(int date, int month, int year, int hour, int minute, int seco
                                                                                                    second(second),
                                                                                                    meridy(meridy) {}
 
-string DateTime::getTimestamp() {
+string DateTime::getTimestamp() const {
     string str = to_string(date) + "/" + to_string(month) + "/" + to_string(year) + " " + to_string(hour) + ":" +
                  to_string(minute) + ":" + to_string(second);
     string mer;
@@ -57,4 +57,32 @@ Slot::Slot(const Professor &requestedBy, const Room &room, const DateTime &start
            char *passedReason, int approved) : requestedBy(requestedBy), room(room), startTime(startTime),
                                                endTime(endTime), approved(approved) {
     strcpy(reason, passedReason);
+}
+
+const Professor &Slot::getRequestedBy() const {
+    return requestedBy;
+}
+
+const Room &Slot::getRoom() const {
+    return room;
+}
+
+const DateTime &Slot::getStartTime() const {
+    return startTime;
+}
+
+const DateTime &Slot::getEndTime() const {
+    return endTime;
+}
+
+const char *Slot::getReason() const {
+    return reason;
+}
+
+int Slot::getApproved() const {
+    return approved;
+}
+
+void Slot::setApproved(int approved) {
+    Slot::approved = approved;
 }
