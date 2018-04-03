@@ -31,6 +31,11 @@ public:
 
 };
 
+class SlotCreateView : public CreateView<Slot> {
+public:
+    void display() override;
+};
+
 class SlotNotificationListView : public ListView<Slot> {
 public:
     vector<Slot> getQueryset() override;

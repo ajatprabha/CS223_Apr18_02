@@ -3,6 +3,7 @@
 //
 
 #include "views.h"
+#include "forms.h"
 
 void FacultyPanelView::display() {
     cout << "Professor: " << Application::getInstance().getCurrentUser()->getFullName() << endl;
@@ -11,7 +12,6 @@ void FacultyPanelView::display() {
 }
 
 void FacultyPanelView::bookSlot() {
-    cout << "To Book a slot, enter the following details correctly" << endl;
     response->view = Controller::getInstance().getView("create-slot");
 }
 
@@ -80,7 +80,7 @@ vector<Room> EmptyRoomListView::getQueryset() {
             }
         }
         for (auto &i : roomFlags) {
-            if(i.second) objects.push_back(*Room::findByRoomNumber(i.first));
+            if (i.second) objects.push_back(*Room::findByRoomNumber(i.first));
         }
     }
     return objects;
@@ -99,4 +99,31 @@ void EmptyRoomListView::getParams() {
     params.audio = (choice == 'y');
     cin >> choice;
     params.video = (choice == 'y');
+}
+
+void SlotCreateView::display() {
+    cout << "To create a slot request fill in the details asked below: \n";
+    auto *requestedBy = dynamic_cast<Professor *>(Application::getInstance().getCurrentUser());
+    Room *room = nullptr;
+    DateTime startTime;
+    DateTime endTime;
+    string reason;
+    cout << "Enter room number for slot request.\n";
+    room = Room::findByRoomNumber(Input::getInt());
+    startTime.inputValidate();
+    endTime.inputValidate();
+    cout << "Enter reason: \n";
+    getline(cin, reason, '\n');
+    if (requestedBy && room) {
+        form = new SlotCreateUpdateForm(*requestedBy, *room, startTime, endTime, reason.c_str(), 0);
+        if (form->isValid()) {
+            Slot slot = form->save();
+            cout << "Slot #" + to_string(slot.getId()) + " requested successfully.\n";
+        } else {
+            form->printErrors();
+        }
+    } else {
+        cout << "Requested room doesn't exist.\n";
+    }
+    response->view = Controller::getInstance().getView("admin-panel");
 }
