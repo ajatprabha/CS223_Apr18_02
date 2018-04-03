@@ -57,6 +57,7 @@ void Application::loadViewPatterns() {
     controller.addViewPattern("admin-unseen-slot-list", new UnseenSlotRequestListView);
     controller.addViewPattern("faculty-panel", new FacultyPanelView);
     controller.addViewPattern("create-slot", new SlotCreateView);
+    controller.addViewPattern("update-slot", new SlotUpdateView);
     controller.addViewPattern("slot-notification-list", new SlotNotificationListView);
     controller.addViewPattern("empty-rooms-list", new EmptyRoomListView);
 }
