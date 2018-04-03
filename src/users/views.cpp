@@ -69,5 +69,5 @@ void UserUpdateView::display() {
 void LogoutView::display() {
     Application::getInstance().logout();
     // Application::saveData();
-    response->view = Controller::getInstance().getView("login");
+    response->view = Controller::getInstance().getView("splash");
 }
