@@ -45,6 +45,7 @@ bool Application::login(const string &_email, const string &_password) {
 void Application::loadViewPatterns() {
     controller.addViewPattern("splash", new SplashView);
     controller.addViewPattern("login", new LoginView);
+    controller.addViewPattern("logout", new LogoutView);
     controller.addViewPattern("create-user", new UserCreateView);
     controller.addViewPattern("update-user", new UserUpdateView);
     controller.addViewPattern("admin-panel", new AdminPanelView);

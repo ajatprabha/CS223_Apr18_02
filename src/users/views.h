@@ -15,6 +15,11 @@ public:
     void display() override;
 };
 
+class LogoutView : public View {
+public:
+    void display() override;
+};
+
 class UserCreateView : public CreateView<BaseUser> {
 public:
     void display() override;

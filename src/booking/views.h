@@ -12,8 +12,9 @@ class FacultyPanelView : public View {
 public:
     FacultyPanelView() : View("Faculty panel\nYou can perform the following actions.\n",
                               {"Update profile", "List empty rooms for a given time slot", "Book Slot",
-                               "Check Status of slots", "Update slot", "Delete slot", "Exit"},
-                              {updateUser, listEmptyRooms, bookSlot, listSlotStatus, updateSlot, deleteSlot, exit}) {}
+                               "Check Status of slots", "Update slot", "Delete slot", "Logout", "Exit"},
+                              {updateUser, listEmptyRooms, bookSlot, listSlotStatus, updateSlot, deleteSlot,
+                               callLogoutView, exit}) {}
 
     void display() override;
 
@@ -28,6 +29,8 @@ public:
     static void updateSlot();
 
     static void deleteSlot();
+
+    static void callLogoutView();
 
 };
 
@@ -49,7 +52,7 @@ private:
         DateTime start, end;
         bool audio = false, video = false;
         int strength = 0;
-    }params;
+    } params;
 public:
     vector<Room> getQueryset() override;
 

@@ -41,6 +41,10 @@ void FacultyPanelView::listEmptyRooms() {
     response->view = Controller::getInstance().getView("empty-rooms-list");
 }
 
+void FacultyPanelView::callLogoutView() {
+    response->view = Controller::getInstance().getView("logout");
+}
+
 vector<Slot> SlotNotificationListView::getQueryset() {
     vector<Slot> objects;
     for (auto &i : objectList) {

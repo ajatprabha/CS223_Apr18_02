@@ -73,6 +73,9 @@ void AdminPanelView::roomDetails() {
     response->view = Controller::getInstance().getView("room-details");
 }
 
+void AdminPanelView::callLogoutView() {
+    response->view = Controller::getInstance().getView("logout");
+}
 
 
 void DeleteUserView::display() {

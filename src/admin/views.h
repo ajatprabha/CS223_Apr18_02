@@ -15,9 +15,9 @@ public:
     AdminPanelView() : View("Admin panel\nYou can perform the following actions.\n",
                             {"View slot requests", "Create new user", "Update existing user", "Delete admin/professor",
                              "Create new room", "Update existing room", "Delete room", "View room details",
-                             "Exit"},
+                             "Logout", "Exit"},
                             {listUnseenSlots, createUser, updateUser, deleteUser, createRoom, updateRoom, deleteRoom,
-                             roomDetails, exit}) {}
+                             roomDetails, callLogoutView, exit}) {}
 
     void display() override;
 
@@ -36,6 +36,8 @@ public:
     static void roomDetails();
 
     static void listUnseenSlots();
+
+    static void callLogoutView();
 };
 
 class AdminDetailView : public DetailView<BaseUser> {

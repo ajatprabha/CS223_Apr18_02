@@ -65,3 +65,9 @@ void UserUpdateView::display() {
     }
     response->view = Controller::getInstance().getView("admin-panel");
 }
+
+void LogoutView::display() {
+    Application::getInstance().logout();
+    // Application::saveData();
+    response->view = Controller::getInstance().getView("login");
+}
