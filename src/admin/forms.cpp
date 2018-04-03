@@ -55,8 +55,10 @@ RoomCreateUpdateForm::RoomCreateUpdateForm(int roomNumber, int strength, bool au
 }
 
 void RoomCreateUpdateForm::clean() {
-    for (auto &i :Room::all()) {
-        if (i.second.getRoomNumber() == roomNumber) addError("A room with this room number already exists.");
+    if(!room) {
+        for (auto &i :Room::all()) {
+            if (i.second.getRoomNumber() == roomNumber) addError("A room with this room number already exists.");
+        }
     }
 }
 

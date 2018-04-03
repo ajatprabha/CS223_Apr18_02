@@ -21,7 +21,8 @@ void Application::start() {
     // Initialise all the static properties
     readData();
     loadViewPatterns();
-    Admin("Admin", "user", "admin@iitj.ac.in", "admin@123").save();     // creates a permanent admin
+    Admin("Admin", "user", "admin@iitj.ac.in", "admin@123").save();// creates a permanent admin
+    //Admin("Saksham", "Banga", "banga.1@iitj.ac.in", "password").save();
     this->view = controller.getView("splash");
     while (this->view) {
         Context tmp(this->user, -1);
