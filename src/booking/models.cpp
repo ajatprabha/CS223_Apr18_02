@@ -95,20 +95,20 @@ void DateTime::inputValidate() {
     value = year*10000000000+month*100000000+date*100000+hour*1000+minute;//timestamp hash
 }
 
-bool DateTime::operator<(DateTime obj) {
-    return value < obj.value;
+bool DateTime::operator<(const DateTime &rhs) const {
+    return value < rhs.value;
 }
 
-bool DateTime::operator>(DateTime obj) {
-    return value > obj.value;
+bool DateTime::operator>(const DateTime &rhs) const {
+    return rhs < *this;
 }
 
-bool DateTime::operator>=(DateTime obj) {
-    return value >= obj.value;
+bool DateTime::operator<=(const DateTime &rhs) const {
+    return !(rhs < *this);
 }
 
-bool DateTime::operator<=(DateTime obj) {
-    return value <= obj.value;
+bool DateTime::operator>=(const DateTime &rhs) const {
+    return !(*this < rhs);
 }
 
 Slot::Slot(const Professor &requestedBy, const Room &room, const DateTime &startTime, const DateTime &endTime,

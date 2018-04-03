@@ -14,7 +14,19 @@ SlotCreateUpdateForm::SlotCreateUpdateForm(const Professor &requestedBy, const R
 }
 
 void SlotCreateUpdateForm::clean() {
-    //TODO
+        bool roomFlag = true;
+        for (auto &i : Slot::all()) {
+            if (!(roomFlag &&
+                  room.getStrength() <= i.second.getRoom().getStrength() &&
+                  ((room.hasAudio() && i.second.getRoom().hasAudio()) || !room.hasAudio()) &&
+                  ((room.hasVideo() && i.second.getRoom().hasVideo()) || !room.hasVideo()) &&
+                  (i.second.getStartTime() >= endTime || i.second.getEndTime() <= startTime))) {
+                roomFlag = false;
+            }
+        }
+        if (!roomFlag) addError("Error: The following may be occuring");
+    int length = sizeof(reason) / sizeof(char);
+    if (length > 2048) addError("Reason size is limited to 2048 characters\n");
 }
 
 Slot &SlotCreateUpdateForm::save() {

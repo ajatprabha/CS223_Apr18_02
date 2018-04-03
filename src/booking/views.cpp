@@ -48,14 +48,14 @@ void FacultyPanelView::callLogoutView() {
 vector<Slot> SlotNotificationListView::getQueryset() {
     vector<Slot> objects;
     for (auto &i : objectList) {
-        if (i.second.getRequestedBy() == dynamic_cast<Professor &>(*context.user)) objects.push_back(i.second);
+        if (i.second.getRequestedBy() == static_cast<Professor &>(*context.user)) objects.push_back(i.second);
     }
     return objects;
 }
 
 void SlotNotificationListView::display() {
     for (auto &slot : getQueryset()) {
-        cout << slot.getId() << ". " << slot.getRoom().getRoomNumber() << "\n";
+        cout << slot.getId() << ". " << slot.getRoom().getRoomNumber() << " "<< slot.getStartTime().getTimestamp()<<" "<< slot.getEndTime().getTimestamp()<< "\n";
     }
     response->view = Controller::getInstance().getView("faculty-panel");
 }
@@ -79,7 +79,7 @@ vector<Room> EmptyRoomListView::getQueryset() {
             if (!(i.second.getApproved() && roomFlags[i.second.getRoom().getRoomNumber()] &&
                   params.strength <= i.second.getRoom().getStrength() &&
                   ((params.audio && i.second.getRoom().hasAudio()) || !params.audio) &&
-                  ((params.video && i.second.getRoom().hasVideo()) || !params.video))) {
+                  ((params.video && i.second.getRoom().hasVideo()) || !params.video)&&(i.second.getStartTime() >= params.end||i.second.getEndTime() <= params.start))) {
                 roomFlags[i.second.getRoom().getRoomNumber()] = false;
             }
         }
@@ -107,7 +107,7 @@ void EmptyRoomListView::getParams() {
 
 void SlotCreateView::display() {
     cout << "To create a slot request fill in the details asked below: \n";
-    auto *requestedBy = dynamic_cast<Professor *>(Application::getInstance().getCurrentUser());
+    Professor *requestedBy = &static_cast<Professor &> (*Application::getInstance().getCurrentUser());
     Room *room = nullptr;
     DateTime startTime;
     DateTime endTime;
@@ -117,6 +117,7 @@ void SlotCreateView::display() {
     startTime.inputValidate();
     endTime.inputValidate();
     cout << "Enter reason: \n";
+    cin.ignore();
     getline(cin, reason, '\n');
     if (requestedBy && room) {
         form = new SlotCreateUpdateForm(*requestedBy, *room, startTime, endTime, reason.c_str(), 0);
@@ -127,7 +128,7 @@ void SlotCreateView::display() {
             form->printErrors();
         }
     } else {
-        cout << "Requested room doesn't exist.\n";
+        cout << "Requested room doesn't exist. / invalid user\n";
     }
-    response->view = Controller::getInstance().getView("admin-panel");
+    response->view = Controller::getInstance().getView("faculty-panel");
 }

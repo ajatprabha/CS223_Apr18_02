@@ -27,13 +27,14 @@ struct DateTime {
 
     void inputValidate();
 
-    bool operator<(DateTime obj);
+    bool operator<(const DateTime &rhs) const;
 
-    bool operator>(DateTime obj);
+    bool operator>(const DateTime &rhs) const;
 
-    bool operator>=(DateTime obj);
+    bool operator<=(const DateTime &rhs) const;
 
-    bool operator<=(DateTime obj);
+    bool operator>=(const DateTime &rhs) const;
+
 };
 
 class Room : public Model<Room> {
