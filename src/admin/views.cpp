@@ -52,16 +52,34 @@ void AdminPanelView::updateRoom() {
 }
 
 void AdminPanelView::deleteRoom() {
-    response->view = Controller::getInstance().getView("delete-room");
+    cout << "Enter the Room number to be deleted:\n. Note that all slots with the room number entered will also be deleted so be careful ";
+    int id = Input::getInt();
+    Room *room = Room::findByRoomId(id);
+    if (!room) {
+        cout << "No room with this number exists.\n";
+    } else {
+
+        DeleteView<Room>().call({Application::getInstance().getCurrentUser(), room->getId()});
+        for(auto &it :Slot::all())
+        {
+            if(it.second.getRoom().getRoomNumber()==room->getRoomNumber())
+                DeleteView<Slot>().call({Application::getInstance().getCurrentUser(), it.second.getId()});
+        }
+    }
+    response->view = Controller::getInstance().getView("admin-panel");
 }
 
 void AdminPanelView::roomDetails() {
     response->view = Controller::getInstance().getView("room-details");
 }
 
+
+
 void DeleteUserView::display() {
     DeleteView::display();
 }
+
+
 
 Context::Context(BaseUser *passedUser, int passedRequestObjectId) {
     user = passedUser;
@@ -158,3 +176,4 @@ void RoomDetailView::display() {
     }
     response->view = Controller::getInstance().getView("admin-panel");
 }
+

@@ -24,6 +24,7 @@ public:
 class RoomCreateUpdateForm : public ModelForm<Room> {
     int roomNumber, strength;
     bool audio, video;
+    Room *room;
 public:
 
     RoomCreateUpdateForm(int roomNumber, int strength, bool audio, bool video, Room *passedInstance = nullptr);
