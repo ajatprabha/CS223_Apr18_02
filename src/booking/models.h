@@ -61,7 +61,7 @@ public:
 
     void setVideo(bool video);
 
-    static Room *findByRoomId(int id);
+    static Room *findByRoomNumber(int id);
 };
 
 

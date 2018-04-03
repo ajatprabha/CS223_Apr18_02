@@ -54,7 +54,7 @@ void AdminPanelView::updateRoom() {
 void AdminPanelView::deleteRoom() {
     cout << "Enter the Room number to be deleted:\n. Note that all slots with the room number entered will also be deleted so be careful ";
     int id = Input::getInt();
-    Room *room = Room::findByRoomId(id);
+    Room *room = Room::findByRoomNumber(id);
     if (!room) {
         cout << "No room with this number exists.\n";
     } else {
@@ -145,7 +145,7 @@ void RoomUpdateView::display() {
     audio = (choice == 'y');
     cin >> choice;
     video = (choice == 'y');
-    Room *room = Room::findByRoomId(roomNumber);
+    Room *room = Room::findByRoomNumber(roomNumber);
     if (room) {
         form = new RoomCreateUpdateForm(roomNumber, strength, audio, video, room);
         if (form->isValid()) {
@@ -163,7 +163,7 @@ void RoomUpdateView::display() {
 void RoomDetailView::display() {
     cout << "Enter room number to get details for: \n";
     int roomNumber = Input::getInt();
-    Room *room = Room::findByRoomId(roomNumber);
+    Room *room = Room::findByRoomNumber(roomNumber);
     if (room) {
         cout << "Details for room #" << room->getRoomNumber() << "\n\tStrength: " << room->getStrength()
              << "\n\tAudio: ";

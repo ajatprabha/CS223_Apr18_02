@@ -36,7 +36,7 @@ void Room::setVideo(bool video) {
     Room::video = video;
 }
 
-Room *Room::findByRoomId(int id) {
+Room *Room::findByRoomNumber(int id) {
     for (auto &item : Room::all()) {
         if (item.second.getRoomNumber() == id) return &(item.second);
     }

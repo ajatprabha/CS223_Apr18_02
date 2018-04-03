@@ -80,7 +80,7 @@ vector<Room> EmptyRoomListView::getQueryset() {
             }
         }
         for (auto &i : roomFlags) {
-            if(i.second) objects.push_back(*Room::findByRoomId(i.first));
+            if(i.second) objects.push_back(*Room::findByRoomNumber(i.first));
         }
     }
     return objects;
