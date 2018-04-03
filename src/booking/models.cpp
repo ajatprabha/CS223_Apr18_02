@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <base/views.h>
 #include "models.h"
 
 Room::Room(int roomNumber, int strength, bool audio, bool video) : roomNumber(roomNumber), strength(strength),
@@ -61,11 +62,37 @@ string DateTime::getTimestamp() const {
 }
 
 void DateTime::inputValidate() {
-    cout<<"Enter the Time in dd mm yy hh mm ss A/P format"<<endl;
-    //validate and keep looping till verified that time is correct
-    cin>>date>>month>>year>>hour>>minute>>second>>meridy;
+    cout<<"Enter the Time in dd mm yyyy hh mm format (24 hour clock format)"<<endl;
+    int days[13]={31,28,31,30,31,30,31,31,30,31,30,31,29};
+    bool flag = false, invalid = false;
+    while(!flag) {
+        if(invalid)
+            cout<<"Date and Time entered are invalid. Please enter again"<<endl;
+        bool leap = false;
+        date = Input::getInt();
+        month = Input::getInt();
+        year = Input::getInt();
+        hour = Input::getInt();
+        minute = Input::getInt();
+        if (year % 400==0 || ((year % 100==0) ^ (year % 4==0))) {
+            leap = true;
+            //cout<<"leap"<<leap<<endl;
+        }
+        if ((month <= 12 && month >= 1) && (minute<60&&minute>=0) && (hour>=0&&hour<24)) {
+            if (month != 2) {
+                if (date <= days[month - 1] && date > 0)
+                    flag = true;
+            } else {
+                if (leap && date <= days[12])
+                    flag = true;
+                if (!leap && date <= days[1])
+                    flag = true;
+            }
+        }
+        invalid = true;
+    }
 
-    value = year*10000000000000+month*10000000000+date*10000000+hour*10000+minute*100+second;
+    value = year*10000000000+month*100000000+date*100000+hour*1000+minute;//timestamp hash
 }
 
 bool DateTime::operator<(DateTime obj) {
