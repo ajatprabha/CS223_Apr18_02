@@ -68,6 +68,7 @@ void UserUpdateView::display() {
 
 void LogoutView::display() {
     Application::getInstance().logout();
+    cout << "Logged out successfully.\n";
     // Application::saveData();
     response->view = Controller::getInstance().getView("splash");
 }
