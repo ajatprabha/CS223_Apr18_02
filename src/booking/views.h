@@ -66,5 +66,10 @@ public:
     void getParams();
 };
 
+class FacultyProfileUpdateView : public UpdateView<BaseUser> {
+public:
+    void display() override;
+};
+
 
 #endif //CLASSROOMBOOKINGSYSTEM_BOOKING_VIEWS_H

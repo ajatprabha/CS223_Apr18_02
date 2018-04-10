@@ -20,7 +20,7 @@ void FacultyPanelView::listSlotStatus() {
 }
 
 void FacultyPanelView::updateUser() {
-    response->view = Controller::getInstance().getView("slot-notification-list");
+    response->view = Controller::getInstance().getView("faculty-profile-update");
 }
 
 void FacultyPanelView::updateSlot() {
@@ -54,8 +54,10 @@ vector<Slot> SlotNotificationListView::getQueryset() {
 }
 
 void SlotNotificationListView::display() {
+    cout << "Here is the list of slot requests that you've made: \n";
     for (auto &slot : getQueryset()) {
-        cout << slot.getId() << ". " << slot.getRoom().getRoomNumber() << " "<< slot.getStartTime().getTimestamp()<<" "<< slot.getEndTime().getTimestamp()<< "\n";
+        cout << slot.getId() << ". " << slot.getRoom().getRoomNumber() << " " << slot.getStartTime().getTimestamp()
+             << " " << slot.getEndTime().getTimestamp() << "\n";
     }
     response->view = Controller::getInstance().getView("faculty-panel");
 }
@@ -79,7 +81,8 @@ vector<Room> EmptyRoomListView::getQueryset() {
             if (!(i.second.getApproved() && roomFlags[i.second.getRoom().getRoomNumber()] &&
                   params.strength <= i.second.getRoom().getStrength() &&
                   ((params.audio && i.second.getRoom().hasAudio()) || !params.audio) &&
-                  ((params.video && i.second.getRoom().hasVideo()) || !params.video)&&(i.second.getStartTime() >= params.end||i.second.getEndTime() <= params.start))) {
+                  ((params.video && i.second.getRoom().hasVideo()) || !params.video) &&
+                  (i.second.getStartTime() >= params.end || i.second.getEndTime() <= params.start))) {
                 roomFlags[i.second.getRoom().getRoomNumber()] = false;
             }
         }
@@ -135,27 +138,53 @@ void SlotCreateView::display() {
 
 void SlotUpdateView::display() {
     cout << "To update a slot request fill in the details asked below: \n";
-    auto *requestedBy = dynamic_cast<Professor *>(Application::getInstance().getCurrentUser());
+    auto *requestedBy = &static_cast<Professor &>(*Application::getInstance().getCurrentUser());
     Room *room = nullptr;
     DateTime startTime;
     DateTime endTime;
     string reason;
-    cout << "Enter room number for slot request.\n";
-    room = Room::findByRoomNumber(Input::getInt());
-    startTime.inputValidate();
-    endTime.inputValidate();
-    cout << "Enter reason: \n";
-    getline(cin, reason, '\n');
-    if (requestedBy && room) {
-        form = new SlotCreateUpdateForm(*requestedBy, *room, startTime, endTime, reason.c_str(), 0);
+    cout << "Enter the slot id you want to update.\n";
+    Slot *instance = Slot::findById(Input::getInt());
+    if (instance) {
+        cout << "Enter new room number for slot request.\n";
+        room = Room::findByRoomNumber(Input::getInt());
+        startTime.inputValidate();
+        endTime.inputValidate();
+        cout << "Enter reason: \n";
+        cin.ignore();
+        getline(cin, reason, '\n');
+        if (requestedBy && room) {
+            form = new SlotCreateUpdateForm(*requestedBy, *room, startTime, endTime, reason.c_str(), 0, instance);
+            if (form->isValid()) {
+                Slot slot = form->save();
+                cout << "Slot #" + to_string(slot.getId()) + " updated successfully.\n";
+            } else {
+                form->printErrors();
+            }
+        } else {
+            cout << "Requested room doesn't exist.\n";
+        }
+    }
+    response->view = Controller::getInstance().getView("faculty-panel");
+}
+
+void FacultyProfileUpdateView::display() {
+    cout << "Fill in the details asked below: \n";
+    string firstName, lastName, password;
+    string email = Application::getInstance().getCurrentUser()->getEmail();
+    cout << "Enter first name, last name and password respectively.\n";
+    cin >> firstName >> lastName >> password;
+    BaseUser *user = BaseUser::findByEmail(email);
+    if (user) {
+        form = new UserCreateUpdateForm(firstName, lastName, email, password, false, user);
         if (form->isValid()) {
-            Slot slot = form->save();
-            cout << "Slot #" + to_string(slot.getId()) + " requested successfully.\n";
+            user = &form->save();
+            cout << "User " + user->getFullName() + " updated successfully.\n";
         } else {
             form->printErrors();
         }
     } else {
-        cout << "Requested room doesn't exist.\n";
+        cout << "A user with " + email + " email address doesn't exist.\n";
     }
     response->view = Controller::getInstance().getView("faculty-panel");
 }
