@@ -164,6 +164,8 @@ void SlotUpdateView::display() {
         } else {
             cout << "Requested room doesn't exist.\n";
         }
+    } else {
+        cout << "Slot doesn't exist.\n";
     }
     response->view = Controller::getInstance().getView("faculty-panel");
 }
