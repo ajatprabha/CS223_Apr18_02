@@ -17,9 +17,9 @@ class Form {
 private:
     vector<string> errors;
 public:
-    bool isValid();
+    const vector<string> &getErrors() const;
 
-    vector<string> getErrors();
+    bool isValid();
 
     void addError(const string &error);
 

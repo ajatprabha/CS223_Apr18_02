@@ -4,7 +4,7 @@
 
 #include "forms.h"
 
-vector<string> Form::getErrors() {
+const vector<string> &Form::getErrors() const {
     return errors;
 }
 
