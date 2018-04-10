@@ -45,6 +45,7 @@ int Input::getInt() {
     while (cin.fail()) {
         cin.clear();
         cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+        cout << "Enter a valid number!\n";
         cin >> number;
     }
     return number;
