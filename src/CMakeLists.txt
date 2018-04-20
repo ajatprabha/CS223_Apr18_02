@@ -21,6 +21,6 @@ set( CBS_SOURCES main.cpp admin/forms/UserCreateUpdateForm.cpp admin/forms/UserC
         booking/views/FacultyProfileUpdateView.cpp booking/views/FacultyProfileUpdateView.h
         init/Application.cpp init/Application.h init/views/SplashView.cpp init/views/SplashView.h )
 
-add_executable(CBS ${CBS_SOURCES})
+add_executable(${PROJECT_NAME} ${CBS_SOURCES})
 
-target_link_libraries(CBS BaseLib)
+target_link_libraries(${PROJECT_NAME} BaseLib)
