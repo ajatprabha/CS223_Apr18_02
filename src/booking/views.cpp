@@ -58,6 +58,10 @@ void SlotNotificationListView::display() {
     for (auto &slot : getQueryset()) {
         cout << slot.getId() << ". " << slot.getRoom().getRoomNumber() << " " << slot.getStartTime().getTimestamp()
              << " " << slot.getEndTime().getTimestamp() << "\n";
+        cout << "\tApproved status: ";
+        if (slot.getApproved() == 1) cout << "Approved,\n";
+        else if (slot.getApproved() == 2) cout << "Denied.\n";
+        else cout << "Pending.\n";
     }
     response->view = Controller::getInstance().getView("faculty-panel");
 }
