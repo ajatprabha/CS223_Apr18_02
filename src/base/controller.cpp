@@ -5,16 +5,15 @@
 #include "controller.h"
 
 Controller *Controller::instance = nullptr;
-vector<ViewPattern> *Controller::views_list = nullptr;
+vector<ViewPattern> Controller::views_list = {};
 
 void Controller::addViewPattern(const string &name, View *view) {
     ViewPattern temp = ViewPattern(name, view);
-    if (!views_list) views_list = new vector<ViewPattern>;
-    views_list->push_back(temp);
+    views_list.push_back(temp);
 }
 
 View *Controller::getView(const string &name) {
-    for (auto &i : *views_list) {
+    for (auto &i : views_list) {
         if (i.getName() == name) {
             return i.getView();
         }

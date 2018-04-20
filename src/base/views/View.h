@@ -14,8 +14,6 @@
 
 using namespace std;
 
-typedef void (*FnPtr)();
-
 struct Response;
 
 class View {
@@ -24,9 +22,9 @@ protected:
     static Response *response;
     string title;
     vector<string> menuOptions{};
-    vector<FnPtr> menuActions = {};
+    vector<View *> menuChoices = {};
 
-    View(const string &passedTitle, const vector<string> &passedVector, const vector<FnPtr> &passedActions);
+    View(const string &passedTitle, const vector<string> &passedVector, const vector<View *> &passedChoices);
 
 public:
     View() = default;
@@ -37,9 +35,7 @@ public:
 
     void populateMenu();
 
-    void callAction(int menuPosition = 0);
-
-    static void exit();
+    void callView(int menuPosition = 0);
 };
 
 

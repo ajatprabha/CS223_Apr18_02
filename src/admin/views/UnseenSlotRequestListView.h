@@ -10,7 +10,7 @@
 
 class UnseenSlotRequestListView : public ListView<Slot> {
 public:
-    vector<Slot> getQueryset() override;
+    vector<Slot> &getQueryset() override;
 
     void display() override;
 };

@@ -13,28 +13,18 @@ public:
                             {"View slot requests", "Create new user", "Update existing user", "Delete admin/professor",
                              "Create new room", "Update existing room", "Delete room", "View room details",
                              "Logout", "Exit"},
-                            {listUnseenSlots, createUser, updateUser, deleteUser, createRoom, updateRoom, deleteRoom,
-                             roomDetails, callLogoutView, exit}) {}
+                            {Controller::getInstance().getView("admin-unseen-slot-list"),
+                             Controller::getInstance().getView("create-user"),
+                             Controller::getInstance().getView("update-user"),
+                             Controller::getInstance().getView("delete-user"),
+                             Controller::getInstance().getView("create-room"),
+                             Controller::getInstance().getView("update-room"),
+                             Controller::getInstance().getView("delete-room"),
+                             Controller::getInstance().getView("room-details"),
+                             Controller::getInstance().getView("logout"),
+                             Controller::getInstance().getView("exit")}) {}
 
     void display() override;
-
-    static void deleteUser();
-
-    static void createUser();
-
-    static void updateUser();
-
-    static void createRoom();
-
-    static void updateRoom();
-
-    static void deleteRoom();
-
-    static void roomDetails();
-
-    static void listUnseenSlots();
-
-    static void callLogoutView();
 };
 
 

@@ -8,7 +8,7 @@
 
 void SplashView::display() {
     populateMenu();
-    callAction(Input::getInt() - 1);
+    callView(Input::getInt() - 1);
 }
 
 void SplashView::callLoginView() {

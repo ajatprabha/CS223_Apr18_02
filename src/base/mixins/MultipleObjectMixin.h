@@ -13,8 +13,10 @@ using namespace std;
 
 template<class T>
 class MultipleObjectMixin : public Model<T> {
+protected:
+    vector<T> objects{};
 public:
-    virtual vector<T> getQueryset() = 0;
+    virtual vector<T> &getQueryset() = 0;
 };
 
 

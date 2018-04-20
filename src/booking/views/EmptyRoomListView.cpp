@@ -14,8 +14,7 @@ void EmptyRoomListView::display() {
     response->view = Controller::getInstance().getView("faculty-panel");
 }
 
-vector<Room> EmptyRoomListView::getQueryset() {
-    vector<Room> objects;
+vector<Room> &EmptyRoomListView::getQueryset() {
     map<int, bool> roomFlags;
     if (params.start < params.end) {
         for (auto &i :Room::all()) {

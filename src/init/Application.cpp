@@ -10,7 +10,7 @@
 #include <users/views/UserUpdateView.h>
 #include <admin/views/AdminPanelView.h>
 #include <admin/views/AdminDetailView.h>
-#include <admin/views/DeleteUserView.h>
+#include <users/views/UserDeleteView.h>
 #include <admin/views/RoomCreateView.h>
 #include <admin/views/RoomUpdateView.h>
 #include <admin/views/RoomDetailView.h>
@@ -21,6 +21,9 @@
 #include <booking/views/SlotUpdateView.h>
 #include <booking/views/SlotNotificationListView.h>
 #include <booking/views/EmptyRoomListView.h>
+#include <base/views/ExitView.h>
+#include <admin/views/RoomDeleteView.h>
+#include <booking/views/SlotDeleteView.h>
 #include "Application.h"
 
 Application *Application::instance = nullptr;
@@ -61,24 +64,27 @@ bool Application::login(const string &_email, const string &_password) {
 }
 
 void Application::loadViewPatterns() {
-    controller.addViewPattern("splash", new SplashView);
+    controller.addViewPattern("exit", new ExitView);
     controller.addViewPattern("login", new LoginView);
+    controller.addViewPattern("splash", new SplashView);
     controller.addViewPattern("logout", new LogoutView);
     controller.addViewPattern("create-user", new UserCreateView);
     controller.addViewPattern("update-user", new UserUpdateView);
-    controller.addViewPattern("admin-panel", new AdminPanelView);
-    controller.addViewPattern("admin-detail", new AdminDetailView);
-    controller.addViewPattern("admin-delete", new DeleteUserView);
+    controller.addViewPattern("delete-user", new UserDeleteView);
+//    controller.addViewPattern("admin-detail", new AdminDetailView);
     controller.addViewPattern("create-room", new RoomCreateView);
     controller.addViewPattern("update-room", new RoomUpdateView);
     controller.addViewPattern("room-details", new RoomDetailView);
+    controller.addViewPattern("delete-room", new RoomDeleteView);
     controller.addViewPattern("admin-unseen-slot-list", new UnseenSlotRequestListView);
-    controller.addViewPattern("faculty-panel", new FacultyPanelView);
     controller.addViewPattern("faculty-profile-update", new FacultyProfileUpdateView);
     controller.addViewPattern("create-slot", new SlotCreateView);
     controller.addViewPattern("update-slot", new SlotUpdateView);
+    controller.addViewPattern("delete-slot", new SlotDeleteView);
     controller.addViewPattern("slot-notification-list", new SlotNotificationListView);
     controller.addViewPattern("empty-rooms-list", new EmptyRoomListView);
+    controller.addViewPattern("admin-panel", new AdminPanelView);
+    controller.addViewPattern("faculty-panel", new FacultyPanelView);
 }
 
 BaseUser *Application::getCurrentUser() {

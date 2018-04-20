@@ -20,19 +20,15 @@ void View::populateMenu() {
     }
 }
 
-View::View(const string &passedTitle, const vector<string> &passedVector, const vector<FnPtr> &passedActions) {
+View::View(const string &passedTitle, const vector<string> &passedVector, const vector<View *> &passedActions) {
     title = passedTitle;
     menuOptions = passedVector;
-    menuActions = passedActions;
+    menuChoices = passedActions;
 }
 
-void View::callAction(int menuPosition) {
-    if (menuPosition >= menuActions.size()) {
+void View::callView(int menuPosition) {
+    if (menuPosition >= menuChoices.size()) {
         response->view = this;
         cout << "Invalid choice, try again!\n";
-    } else menuActions[menuPosition]();
-}
-
-void View::exit() {
-    response->view = nullptr;
+    } else response->view = menuChoices[menuPosition];
 }

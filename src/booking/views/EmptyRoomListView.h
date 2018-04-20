@@ -17,7 +17,7 @@ private:
         int strength = 0;
     } params;
 public:
-    vector<Room> getQueryset() override;
+    vector<Room> &getQueryset() override;
 
     void display() override;
 

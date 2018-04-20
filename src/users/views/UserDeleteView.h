@@ -7,7 +7,7 @@
 
 #include <base/views/DeleteView.h>
 
-class DeleteUserView : public DeleteView<BaseUser> {
+class UserDeleteView : public DeleteView<BaseUser> {
 public:
     void display() final;
 };

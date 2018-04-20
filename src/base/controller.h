@@ -16,7 +16,7 @@ using namespace std;
 class Controller {
 private:
     static Controller *instance;
-    static vector<ViewPattern> *views_list;
+    static vector<ViewPattern> views_list;
     Controller() = default;
 
 public:
