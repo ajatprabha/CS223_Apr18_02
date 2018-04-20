@@ -4,18 +4,26 @@
 
 #include <admin/forms/UserCreateUpdateForm.h>
 #include <base/controller.h>
+#include <init/Application.h>
 #include "UserUpdateView.h"
 
 void UserUpdateView::display() {
+    BaseUser loggedInUser = *Application::getInstance().getCurrentUser();
     cout << "To update a user fill in the details asked below: \n";
     string email, firstName, lastName, password;
     char adminStatus;
-    cout << "Enter the email of user:\n";
-    cin >> email;
+    if (loggedInUser.isAdmin()) {
+        cout << "Enter the email of user:\n";
+        cin >> email;
+    } else {
+        email = loggedInUser.getEmail();
+    }
     cout << "Enter first name, last name and password respectively.\n";
     cin >> firstName >> lastName >> password;
-    cout << "Should this user be an admin? (y/n)\n";
-    cin >> adminStatus;
+    if (loggedInUser.isAdmin()) {
+        cout << "Should this user be an admin? (y/n)\n";
+        cin >> adminStatus;
+    } else adminStatus = 'n';
     BaseUser *user = BaseUser::findByEmail(email);
     if (user) {
         form = new UserCreateUpdateForm(firstName, lastName, email, password, adminStatus == 'y', user);
@@ -28,5 +36,8 @@ void UserUpdateView::display() {
     } else {
         cout << "A user with " + email + " email address doesn't exist.\n";
     }
-    response->view = Controller::getInstance().getView("admin-panel");
+    if (loggedInUser.isAdmin())
+        response->view = Controller::getInstance().getView("admin-panel");
+    else
+        response->view = Controller::getInstance().getView("faculty-panel");
 }
