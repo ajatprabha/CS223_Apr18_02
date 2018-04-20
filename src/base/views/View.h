@@ -10,6 +10,7 @@
 #include <iostream>
 #include <base/models/BaseUser.h>
 #include <base/utils/Context.h>
+#include <base/utils/Response.h>
 
 using namespace std;
 
@@ -39,10 +40,6 @@ public:
     void callAction(int menuPosition = 0);
 
     static void exit();
-};
-
-struct Response {
-    View *view;
 };
 
 
