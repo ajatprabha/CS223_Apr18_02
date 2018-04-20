@@ -13,11 +13,6 @@ Response View::call(const Context &contextPassed) {
     return *response;
 }
 
-Context::Context(BaseUser *passedUser, int passedRequestObjectId) {
-    user = passedUser;
-    requestObjectId = passedRequestObjectId;
-}
-
 void View::populateMenu() {
     cout << title << endl;
     for (int i = 0; i < menuOptions.size(); ++i) {

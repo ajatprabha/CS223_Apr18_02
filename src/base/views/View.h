@@ -9,19 +9,11 @@
 #include <vector>
 #include <iostream>
 #include <base/models/BaseUser.h>
+#include <base/utils/Context.h>
 
 using namespace std;
 
 typedef void (*FnPtr)();
-
-struct Context {
-    BaseUser *user = nullptr;
-    int requestObjectId = -1;
-
-    Context() = default;
-
-    Context(BaseUser *passedUser, int passedRequestObjectId);
-};
 
 struct Response;
 
