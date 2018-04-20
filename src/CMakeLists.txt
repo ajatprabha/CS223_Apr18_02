@@ -1,3 +1,26 @@
-project(CBS_SRC)
 
-add_executable(CBS main.cpp init.h init.cpp base/models.h base/models.cpp base/views.h base/views.cpp users/models.h users/models.cpp controller.h controller.cpp base/exceptions.cpp base/exceptions.h base/mixins.cpp base/mixins.h base/forms.cpp base/forms.h admin/views.cpp admin/views.h admin/forms.cpp admin/forms.h users/views.cpp users/views.h booking/views.cpp booking/views.h booking/models.cpp booking/models.h booking/forms.cpp booking/forms.h)
+include_directories(base)
+link_directories(base)
+add_subdirectory(base)
+
+set( CBS_SOURCES main.cpp admin/forms/UserCreateUpdateForm.cpp admin/forms/UserCreateUpdateForm.h
+        admin/forms/RoomCreateUpdateForm.cpp admin/forms/RoomCreateUpdateForm.h users/models/Professor.cpp
+        users/models/Professor.h users/models/Admin.cpp users/models/Admin.h users/views/LoginView.cpp
+        users/views/LoginView.h users/views/LogoutView.cpp users/views/LogoutView.h users/views/UserCreateView.cpp
+        users/views/UserCreateView.h users/views/UserUpdateView.cpp users/views/UserUpdateView.h
+        admin/views/AdminPanelView.cpp admin/views/AdminPanelView.h admin/views/AdminDetailView.cpp
+        admin/views/AdminDetailView.h admin/views/UnseenSlotRequestListView.cpp admin/views/UnseenSlotRequestListView.h
+        admin/views/DeleteUserView.cpp admin/views/DeleteUserView.h admin/views/RoomCreateView.cpp
+        admin/views/RoomCreateView.h admin/views/RoomDetailView.cpp admin/views/RoomDetailView.h
+        admin/views/RoomUpdateView.cpp admin/views/RoomUpdateView.h booking/models/Room.cpp booking/models/Room.h
+        booking/models/Slot.cpp booking/models/Slot.h booking/forms/SlotCreateUpdateForm.cpp
+        booking/forms/SlotCreateUpdateForm.h booking/views/FacultyPanelView.cpp booking/views/FacultyPanelView.h
+        booking/views/EmptyRoomListView.cpp booking/views/EmptyRoomListView.h booking/views/SlotCreateView.cpp
+        booking/views/SlotCreateView.h booking/views/SlotUpdateView.cpp booking/views/SlotUpdateView.h
+        booking/views/SlotNotificationListView.cpp booking/views/SlotNotificationListView.h
+        booking/views/FacultyProfileUpdateView.cpp booking/views/FacultyProfileUpdateView.h
+        init/Application.cpp init/Application.h init/views/SplashView.cpp init/views/SplashView.h )
+
+add_executable(CBS ${CBS_SOURCES})
+
+target_link_libraries(CBS BaseLib)

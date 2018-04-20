@@ -2,8 +2,8 @@
 // Created by ajatprabha on 20/3/18.
 //
 
+#include <base/models/Model.h>
 #include "gtest/gtest.h"
-#include "../../src/base/models.h"
 
 
 class Mock : public Model<Mock> {

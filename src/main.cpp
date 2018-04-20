@@ -1,4 +1,4 @@
-#include "init.h"
+#include <init/Application.h>
 
 int main() {
     Application app = Application::getInstance();

@@ -2,8 +2,11 @@
 // Created by saksham on 2/4/18.
 //
 
+#include <base/models/BaseUser.h>
+#include <base/forms/ModelForm.h>
+#include <users/models/Admin.h>
+#include <users/models/Professor.h>
 #include "gtest/gtest.h"
-#include "../../src/base/forms.h"
 
 
 class MockUserCreateForm : public ModelForm<BaseUser> {
