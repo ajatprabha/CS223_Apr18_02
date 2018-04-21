@@ -18,10 +18,10 @@ string Input::getEmail() {
 
 string Input::regexInputValidate(const regex &regEx, const string &errorMessage) {
     string input;
-    cin >> input;
+    cin.getline(input);
     while (!regex_match(input, regEx)) {
         cout << errorMessage << endl;
-        cin >> input;
+        cin.getline(input);
     }
     return input;
 }
