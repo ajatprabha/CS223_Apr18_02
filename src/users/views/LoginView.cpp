@@ -4,13 +4,16 @@
 
 #include <base/controller.h>
 #include <init/Application.h>
+#include <base/utils/Input.h>
 #include "LoginView.h"
 
 void LoginView::display() {
     populateMenu();
     string email, password;
-    cout << "Enter your email and password\n";
-    cin >> email >> password;
+    cout << "Enter your email:\n";
+    email = Input::getEmail();
+    cout << "Enter your password:\n";
+    cin >> password;
     Controller controller = Controller::getInstance();
     Application appInstance = Application::getInstance();
     if (appInstance.login(email, password)) {
