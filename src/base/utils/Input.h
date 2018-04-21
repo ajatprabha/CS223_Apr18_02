@@ -6,13 +6,17 @@
 #define CLASSROOMBOOKINGSYSTEM_INPUT_H
 
 #include <iostream>
-#include <limits>
+#include <regex>
 
 using namespace std;
 
 class Input {
 public:
-    static int getInt();
+    static long long getInt();
+
+    static string getEmail();
+
+    static string regexInputValidate(const regex& regEx, const string &errorMessage);
 };
 
 
