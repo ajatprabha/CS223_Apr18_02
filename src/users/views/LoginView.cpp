@@ -13,7 +13,7 @@ void LoginView::display() {
     cout << "Enter your email:\n";
     email = Input::getEmail();
     cout << "Enter your password:\n";
-    cin >> password;
+    password = Input::getPassword();
     Controller controller = Controller::getInstance();
     Application appInstance = Application::getInstance();
     if (appInstance.login(email, password)) {

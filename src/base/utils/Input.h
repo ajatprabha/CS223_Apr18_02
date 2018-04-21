@@ -16,6 +16,8 @@ public:
 
     static string getEmail();
 
+    static string getPassword();
+
     static string regexInputValidate(const regex& regEx, const string &errorMessage);
 };
 
