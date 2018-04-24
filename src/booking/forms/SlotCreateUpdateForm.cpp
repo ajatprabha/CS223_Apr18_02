@@ -24,17 +24,16 @@ void SlotCreateUpdateForm::clean() {
             roomFlag = false;
         }
     }
-    if (!roomFlag) addError("Error: The following may be occuring");
+    if (!roomFlag) addError("Error: The following may be occuring");    //TODO
     int length = sizeof(reason) / sizeof(char);
     if (length > 2048) addError("Reason size is limited to 2048 characters\n");
 }
 
 Slot &SlotCreateUpdateForm::save() {
     Slot *temp;
-    int id;
     temp = new Slot(requestedBy, room, startTime, endTime, reason, approved);
     if (instance) {
-        id = instance->getId();
+        int id = instance->getId();
         instance->remove();
         temp->setId(id);
     }
