@@ -3,8 +3,8 @@ project(ClassroomBookingSystem)
 
 set(CMAKE_CXX_STANDARD 11)
 
-include_directories(src)
+include_directories(code)
 
-add_subdirectory(src)
+add_subdirectory(code)
 add_subdirectory(lib)
 add_subdirectory(tests)
