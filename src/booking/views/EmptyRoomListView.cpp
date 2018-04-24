@@ -15,20 +15,28 @@ void EmptyRoomListView::display() {
 }
 
 vector<Room> &EmptyRoomListView::getQueryset() {
+    objects.clear();
     map<int, bool> roomFlags;
     if (params.start < params.end) {
         for (auto &i :Room::all()) {
             roomFlags[i.second.getRoomNumber()] = true;
         }
+
         for (auto &i : Slot::all()) {
-            if (!(i.second.getApproved() && roomFlags[i.second.getRoom().getRoomNumber()] &&
-                  params.strength <= i.second.getRoom().getStrength() &&
-                  ((params.audio && i.second.getRoom().hasAudio()) || !params.audio) &&
-                  ((params.video && i.second.getRoom().hasVideo()) || !params.video) &&
-                  (i.second.getStartTime() >= params.end || i.second.getEndTime() <= params.start))) {
+            if (i.second.getApproved()==1 && roomFlags[i.second.getRoom().getRoomNumber()] &&
+                clash(i.second.getStartTime(), i.second.getEndTime())) {
                 roomFlags[i.second.getRoom().getRoomNumber()] = false;
             }
         }
+        for(auto &i: Room::all()){
+            if(params.strength>i.second.getStrength())
+                roomFlags[i.second.getRoomNumber()]=false;
+            if(params.audio && !i.second.hasAudio())
+                roomFlags[i.second.getRoomNumber()] = false;
+            if(params.video && !i.second.hasVideo())
+                roomFlags[i.second.getRoomNumber()] = false;
+        }
+
         for (auto &i : roomFlags) {
             if (i.second) objects.push_back(*Room::findByRoomNumber(i.first));
         }
@@ -48,4 +56,8 @@ void EmptyRoomListView::getParams() {
     params.audio = (Input::getChar() == 'y');
     cout << "Video required? (y/n): ";
     params.video = (Input::getChar() == 'y');
+}
+
+bool EmptyRoomListView::clash(const DateTime &startTime, const DateTime &endTime) {
+    return (params.start >= startTime && params.start <= endTime) || (params.end >= startTime && params.start <= startTime);
 }
