@@ -22,6 +22,8 @@ public:
     void display() override;
 
     void getParams();
+
+    bool clash(const DateTime &startTime, const DateTime &endTime);
 };
 
 

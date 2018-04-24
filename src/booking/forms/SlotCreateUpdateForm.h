@@ -24,6 +24,8 @@ public:
     void clean() override;
 
     Slot &save() override;
+
+    bool clash(const DateTime &time, const DateTime &dateTime);
 };
 
 
