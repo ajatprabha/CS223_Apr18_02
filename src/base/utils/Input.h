@@ -20,6 +20,8 @@ public:
 
     static string getPassword();
 
+    static string getString();
+
     static string regexInputValidate(const regex& regEx, const string &errorMessage);
 };
 

@@ -19,21 +19,28 @@ string Input::getEmail() {
 string Input::regexInputValidate(const regex &regEx, const string &errorMessage) {
     string input;
     cin.clear();
-    getline(cin,input);
+    getline(cin, input);
     while (!regex_match(input, regEx)) {
         cout << errorMessage << endl;
-        getline(cin,input);
+        getline(cin, input);
     }
     cin.clear();
     return input;
 }
 
 string Input::getPassword() {
-    regex passwordRegex("^[^-\\s][a-zA-Z0-9_@./#&+\\s-]+$");      // rejects strings starting with spaces, containing only spaces or empty strings
+    regex passwordRegex(
+            "^[^-\\s][a-zA-Z0-9_@./#&+\\s-]+$");      /* rejects strings starting with spaces,
+                                                       * containing only spaces or empty strings */
     return regexInputValidate(passwordRegex, "Invalid input!");
 }
 
 char Input::getChar() {
     regex charRegex("[a-z]|[A-Z]");
     return regexInputValidate(charRegex, "Enter a valid character!")[0];
+}
+
+string Input::getString() {
+    regex stringRegex(R"((.|\s)*\S(.|\s)*)");
+    return regexInputValidate(stringRegex, "Enter valid input");
 }
