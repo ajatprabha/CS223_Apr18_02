@@ -17,7 +17,6 @@
 #include <admin/views/RoomDeleteView.h>
 #include <admin/views/UnseenSlotRequestListView.h>
 #include <booking/views/FacultyPanelView.h>
-#include <booking/views/FacultyProfileUpdateView.h>
 #include <booking/views/SlotCreateView.h>
 #include <booking/views/SlotUpdateView.h>
 #include <booking/views/SlotDeleteView.h>
@@ -77,7 +76,6 @@ void Application::loadViewPatterns() {
     controller.addViewPattern("room-details", new RoomDetailView);
     controller.addViewPattern("delete-room", new RoomDeleteView);
     controller.addViewPattern("admin-unseen-slot-list", new UnseenSlotRequestListView);
-    controller.addViewPattern("faculty-profile-update", new FacultyProfileUpdateView);
     controller.addViewPattern("create-slot", new SlotCreateView);
     controller.addViewPattern("update-slot", new SlotUpdateView);
     controller.addViewPattern("delete-slot", new SlotDeleteView);

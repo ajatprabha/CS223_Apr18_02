@@ -18,7 +18,6 @@ set( CBS_SOURCES main.cpp admin/forms/UserCreateUpdateForm.cpp admin/forms/UserC
         booking/views/EmptyRoomListView.cpp booking/views/EmptyRoomListView.h booking/views/SlotCreateView.cpp
         booking/views/SlotCreateView.h booking/views/SlotUpdateView.cpp booking/views/SlotUpdateView.h
         booking/views/SlotNotificationListView.cpp booking/views/SlotNotificationListView.h
-        booking/views/FacultyProfileUpdateView.cpp booking/views/FacultyProfileUpdateView.h
         init/Application.cpp init/Application.h init/views/SplashView.cpp init/views/SplashView.h admin/views/RoomDeleteView.cpp admin/views/RoomDeleteView.h booking/views/SlotDeleteView.cpp booking/views/SlotDeleteView.h)
 
 add_executable(${PROJECT_NAME} ${CBS_SOURCES})
