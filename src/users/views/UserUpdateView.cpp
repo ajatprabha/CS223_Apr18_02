@@ -5,28 +5,33 @@
 #include <admin/forms/UserCreateUpdateForm.h>
 #include <base/controller.h>
 #include <init/Application.h>
+#include <base/utils/Input.h>
 #include "UserUpdateView.h"
 
 void UserUpdateView::display() {
     BaseUser loggedInUser = *Application::getInstance().getCurrentUser();
     cout << "To update a user fill in the details asked below: \n";
     string email, firstName, lastName, password;
-    char adminStatus;
+    bool adminStatus;
     if (loggedInUser.isAdmin()) {
-        cout << "Enter the email of user:\n";
-        cin >> email;
+        cout << "Email: ";
+        email = Input::getEmail();
     } else {
         email = loggedInUser.getEmail();
     }
-    cout << "Enter first name, last name and password respectively.\n";
-    cin >> firstName >> lastName >> password;
+    cout << "First name: ";
+    firstName = Input::getString();
+    cout << "Last name: ";
+    lastName = Input::getString();
+    cout << "Password: ";
+    password = Input::getPassword();
     if (loggedInUser.isAdmin()) {
-        cout << "Should this user be an admin? (y/n)\n";
-        cin >> adminStatus;
-    } else adminStatus = 'n';
+        cout << "Should this user be an admin? (y/n): ";
+        adminStatus = (Input::getChar() == 'y');
+    } else adminStatus = false;
     BaseUser *user = BaseUser::findByEmail(email);
     if (user) {
-        form = new UserCreateUpdateForm(firstName, lastName, email, password, adminStatus == 'y', user);
+        form = new UserCreateUpdateForm(firstName, lastName, email, password, adminStatus, user);
         if (form->isValid()) {
             user = &form->save();
             cout << "User " + user->getFullName() + " updated successfully.\n";
@@ -36,8 +41,6 @@ void UserUpdateView::display() {
     } else {
         cout << "A user with " + email + " email address doesn't exist.\n";
     }
-    if (loggedInUser.isAdmin())
-        response->view = Controller::getInstance().getView("admin-panel");
-    else
-        response->view = Controller::getInstance().getView("faculty-panel");
+    response->view = loggedInUser.isAdmin() ? Controller::getInstance().getView("admin-panel")
+                                            : Controller::getInstance().getView("faculty-panel");
 }
