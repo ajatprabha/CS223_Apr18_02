@@ -23,7 +23,7 @@ void UnseenSlotRequestListView::display() {
         }
         Slot *slot = Slot::findById(Input::getInt());
         if (slot) {
-            cout << "Enter 1 to approve, 2 to deny\n";
+            cout << "Enter 1 to approve, 2 to deny: ";
             slot->setApproved(Input::getInt());
             slot->save();
         } else cout << "Invalid slot selection\n";
