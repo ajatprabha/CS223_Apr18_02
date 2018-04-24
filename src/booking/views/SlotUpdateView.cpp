@@ -13,16 +13,15 @@ void SlotUpdateView::display() {
     DateTime startTime;
     DateTime endTime;
     string reason;
-    cout << "Enter the slot id you want to update.\n";
+    cout << "Enter the slot id you want to update: ";
     Slot *instance = Slot::findById(Input::getInt());
     if (instance) {
-        cout << "Enter new room number for slot request.\n";
+        cout << "Enter new room number for slot request: ";
         room = Room::findByRoomNumber(Input::getInt());
         startTime.inputValidate();
         endTime.inputValidate();
-        cout << "Enter reason: \n";
-        cin.ignore();
-        getline(cin, reason, '\n');
+        cout << "Enter reason: ";
+        reason = Input::getString();
         if (requestedBy && room) {
             form = new SlotCreateUpdateForm(*requestedBy, *room, startTime, endTime, reason.c_str(), 0, instance);
             if (form->isValid()) {
