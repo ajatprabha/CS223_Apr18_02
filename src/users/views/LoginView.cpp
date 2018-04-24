@@ -10,9 +10,9 @@
 void LoginView::display() {
     populateMenu();
     string email, password;
-    cout << "Enter your email:\n";
+    cout << "Enter your email: ";
     email = Input::getEmail();
-    cout << "Enter your password:\n";
+    cout << "Enter your password: ";
     password = Input::getPassword();
     Controller controller = Controller::getInstance();
     Application appInstance = Application::getInstance();
