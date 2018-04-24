@@ -11,13 +11,13 @@ void RoomUpdateView::display() {
     cout << "To update a room fill in the details asked below: \n";
     int roomNumber, strength;
     bool audio, video;
-    cout << "Enter room number:\n";
+    cout << "Enter room number: ";
     roomNumber = Input::getInt();
-    cout << "Enter strength:\n";
+    cout << "Enter strength: ";
     strength = Input::getInt();
-    cout << "Audio required?\n";
+    cout << "Audio required? (y/n): ";
     audio = (Input::getChar() == 'y');
-    cout << "Video required?\n";
+    cout << "Video required? (y/n): ";
     video = (Input::getChar() == 'y');
     Room *room = Room::findByRoomNumber(roomNumber);
     if (room) {
