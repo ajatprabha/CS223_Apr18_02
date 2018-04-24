@@ -1,0 +1,1 @@
+No static data files required, they are generated automatically in a relative path
