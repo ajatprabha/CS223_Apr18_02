@@ -2,28 +2,28 @@
 // Created by ajatprabha on 12/3/18.
 //
 
-#include <users/models/Admin.h>
 #include <init/views/SplashView.h>
+#include <users/models/Admin.h>
 #include <users/views/LoginView.h>
 #include <users/views/LogoutView.h>
 #include <users/views/UserCreateView.h>
 #include <users/views/UserUpdateView.h>
+#include <users/views/UserDeleteView.h>
 #include <admin/views/AdminPanelView.h>
 #include <admin/views/AdminDetailView.h>
-#include <users/views/UserDeleteView.h>
 #include <admin/views/RoomCreateView.h>
 #include <admin/views/RoomUpdateView.h>
 #include <admin/views/RoomDetailView.h>
+#include <admin/views/RoomDeleteView.h>
 #include <admin/views/UnseenSlotRequestListView.h>
 #include <booking/views/FacultyPanelView.h>
 #include <booking/views/FacultyProfileUpdateView.h>
 #include <booking/views/SlotCreateView.h>
 #include <booking/views/SlotUpdateView.h>
+#include <booking/views/SlotDeleteView.h>
 #include <booking/views/SlotNotificationListView.h>
 #include <booking/views/EmptyRoomListView.h>
 #include <base/views/ExitView.h>
-#include <admin/views/RoomDeleteView.h>
-#include <booking/views/SlotDeleteView.h>
 #include "Application.h"
 
 Application *Application::instance = nullptr;
@@ -41,13 +41,12 @@ void Application::start() {
     // Initialise all the static properties
     readData();
     loadViewPatterns();
-    Admin("Admin", "user", "admin@iitj.ac.in", "admin@123").save();// creates a permanent admin
+    Admin("Admin", "user", "admin@iitj.ac.in", "admin@123").save();     // creates a permanent admin
     //Admin("Saksham", "Banga", "banga.1@iitj.ac.in", "password").save();
     view = controller.getView("splash");
     while (view) {
         Context tmp(user, -1);
-        Response response = view->call(tmp);
-        view = response.view;
+        view = view->call(tmp).view;
         cout << "=========================================================\n\n";
     }
     saveData();
@@ -60,7 +59,8 @@ bool Application::login(const string &_email, const string &_password) {
             user = temp;
             return true;
         }
-    } else return false;
+    }
+    return false;
 }
 
 void Application::loadViewPatterns() {

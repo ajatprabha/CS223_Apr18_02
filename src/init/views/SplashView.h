@@ -14,8 +14,6 @@ public:
                         {Controller::getInstance().getView("login"), Controller::getInstance().getView("exit")}) {}
 
     void display() override;
-
-    static void callLoginView();
 };
 
 

@@ -10,7 +10,3 @@ void SplashView::display() {
     populateMenu();
     callView(Input::getInt() - 1);
 }
-
-void SplashView::callLoginView() {
-    response->view = Controller::getInstance().getView("login");
-}
