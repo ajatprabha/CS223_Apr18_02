@@ -6,9 +6,8 @@
 #include "SlotDeleteView.h"
 
 void SlotDeleteView::display() {
-    cout << "Enter the slot id to be deleted:\n";
-    int id = Input::getInt();
-    Slot *slot = Slot::findById(id);
+    cout << "Enter the slot id to be deleted: ";
+    Slot *slot = Slot::findById(Input::getInt());
     if (!slot) {
         cout << "No slot with this id exists.\n";
     } else {
