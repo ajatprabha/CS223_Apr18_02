@@ -6,9 +6,9 @@
 #include <limits>
 #include "Input.h"
 
-long long Input::getInt() {
-    regex intRegex("[0-9]{1,15}");      // accepts a number input between 1-15 length
-    return stoll(regexInputValidate(intRegex, "Enter a valid number!"));
+int Input::getInt() {
+    regex intRegex("[0-9]{1,4}");      // accepts a number input between 1-15 length
+    return stoi(regexInputValidate(intRegex, "Enter a valid number!"));
 }
 
 string Input::getEmail() {
