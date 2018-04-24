@@ -10,11 +10,8 @@
 void RoomDeleteView::display() {
     cout << "Enter the Room number to be deleted:\n. "
             "Note that all slots with the room number entered will also be deleted so be careful.\n";
-    int id = Input::getInt();
-    Room *room = Room::findByRoomNumber(id);
-    if (!room) {
-        cout << "No room with this number exists.\n";
-    } else {
+    Room *room = Room::findByRoomNumber(Input::getInt());
+    if (room) {
         context.requestObjectId = room->getId();
         DeleteView::display();
         for (auto &it :Slot::all()) {
@@ -22,6 +19,8 @@ void RoomDeleteView::display() {
                 it.second.remove();
         }
         cout << "Room #" + to_string(room->getRoomNumber()) + " successfuly deleted.\n";
+    } else {
+        cout << "No room with this number exists.\n";
     }
     response->view = Controller::getInstance().getView("admin-panel");
 }
