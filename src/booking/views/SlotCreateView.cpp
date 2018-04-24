@@ -13,13 +13,12 @@ void SlotCreateView::display() {
     DateTime startTime;
     DateTime endTime;
     string reason;
-    cout << "Enter room number for slot request.\n";
+    cout << "Enter room number for slot request: ";
     room = Room::findByRoomNumber(Input::getInt());
     startTime.inputValidate();
     endTime.inputValidate();
-    cout << "Enter reason: \n";
-    cin.ignore();
-    getline(cin, reason, '\n');
+    cout << "Enter reason: ";
+    reason = Input::getString();
     if (requestedBy && room) {
         form = new SlotCreateUpdateForm(*requestedBy, *room, startTime, endTime, reason.c_str(), 0);
         if (form->isValid()) {
