@@ -29,6 +29,11 @@ string Input::regexInputValidate(const regex &regEx, const string &errorMessage)
 }
 
 string Input::getPassword() {
-    regex passwordRegex("^[^-\\s][a-zA-Z0-9_\\s-]+$");      // rejects strings starting with spaces, containing only spaces or empty strings
+    regex passwordRegex("^[^-\\s][a-zA-Z0-9_@./#&+\\s-]+$");      // rejects strings starting with spaces, containing only spaces or empty strings
     return regexInputValidate(passwordRegex, "Invalid input!");
+}
+
+char Input::getChar() {
+    regex charRegex("[a-z]|[A-Z]");
+    return regexInputValidate(charRegex, "Enter a valid character!")[0];
 }

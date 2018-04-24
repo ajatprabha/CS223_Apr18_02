@@ -11,14 +11,14 @@ void RoomCreateView::display() {
     cout << "To create a room fill in the details asked below: \n";
     int roomNumber, strength;
     bool audio, video;
-    char choice;
-    cout << "Enter room number, strength, audio(y/n) and video(y/n) respectively.\n";
+    cout << "Enter room number:\n";
     roomNumber = Input::getInt();
+    cout << "Enter strength:\n";
     strength = Input::getInt();
-    cin >> choice;
-    audio = (choice == 'y');
-    cin >> choice;
-    video = (choice == 'y');
+    cout << "Audio required?\n";
+    audio = (Input::getChar() == 'y');
+    cout << "Video required?\n";
+    video = (Input::getChar() == 'y');
     form = new RoomCreateUpdateForm(roomNumber, strength, audio, video);
     if (form->isValid()) {
         Room room = form->save();

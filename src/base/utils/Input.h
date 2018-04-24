@@ -12,7 +12,9 @@ using namespace std;
 
 class Input {
 public:
-    static long long getInt();
+    static int getInt();
+
+    static char getChar();
 
     static string getEmail();
 
