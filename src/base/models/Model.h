@@ -37,7 +37,7 @@ public:
 
     static void readFromFile(const string &filename);
 
-    void setId(int id);
+    void setId(int passedId);
 };
 
 template<class T>
