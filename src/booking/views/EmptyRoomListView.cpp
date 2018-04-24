@@ -37,16 +37,15 @@ vector<Room> &EmptyRoomListView::getQueryset() {
 }
 
 void EmptyRoomListView::getParams() {
-    cout << "Start time: ";
+    cout << "Fill in the following details:\n"
+         << "Start time -> ";
     params.start.inputValidate();
-    cout << "End time: ";
+    cout << "End time -> ";
     params.end.inputValidate();
-    cout << "Enter the room strength:\n";
+    cout << "Enter strength: ";
     params.strength = Input::getInt();
-    cout << "Audio-Video required (enter y/n respectively)\n";
-    char choice;
-    cin >> choice;
-    params.audio = (choice == 'y');
-    cin >> choice;
-    params.video = (choice == 'y');
+    cout << "Audio required? (y/n): ";
+    params.audio = (Input::getChar() == 'y');
+    cout << "Video required? (y/n): ";
+    params.video = (Input::getChar() == 'y');
 }
