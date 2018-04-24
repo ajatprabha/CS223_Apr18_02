@@ -31,7 +31,6 @@ void UserCreateUpdateForm::clean() {
 BaseUser &UserCreateUpdateForm::save() {
     BaseUser *temp;
     bool loginUser = false;
-    int id;
     if (adminStatus) {
         temp = new Admin(firstName, lastName, email, password);
     } else {
@@ -42,7 +41,7 @@ BaseUser &UserCreateUpdateForm::save() {
             loginUser = true;
             Application::getInstance().logout();
         }
-        id = instance->getId();
+        int id = instance->getId();
         instance->remove();
         temp->setId(id);
     }

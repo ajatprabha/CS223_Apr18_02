@@ -19,10 +19,9 @@ void RoomCreateUpdateForm::clean() {
 
 Room &RoomCreateUpdateForm::save() {
     Room *temp;
-    int id;
     temp = new Room(roomNumber, strength, audio, video);
     if (instance) {
-        id = instance->getId();
+        int id = instance->getId();
         instance->remove();
         temp->setId(id);
     }
