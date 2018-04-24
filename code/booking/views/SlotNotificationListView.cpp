@@ -6,6 +6,7 @@
 #include "SlotNotificationListView.h"
 
 vector<Slot> &SlotNotificationListView::getQueryset() {
+    objects.clear();
     for (auto &i : objectList) {
         if (i.second.getRequestedBy() == static_cast<Professor &>(*context.user)) objects.push_back(i.second);
     }

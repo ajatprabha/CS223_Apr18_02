@@ -7,6 +7,7 @@
 #include "UnseenSlotRequestListView.h"
 
 vector<Slot> &UnseenSlotRequestListView::getQueryset() {
+    objects.clear();
     for (auto &i : objectList) {
         if (i.second.getApproved() == 0) objects.push_back(i.second);
     }
