@@ -22,23 +22,22 @@ string DateTime::getTimestamp() const {
 }
 
 void DateTime::inputValidate() {
-    cout<<"Enter the Time in dd mm yyyy hh mm format (24 hour clock format)"<<endl;
-    int days[13]={31,28,31,30,31,30,31,31,30,31,30,31,29};
+    cout << "Enter the time in 'dd mm yyyy hh mm' format (24 hour clock format)" << endl;
+    int days[13] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31, 29};
     bool flag = false, invalid = false;
-    while(!flag) {
-        if(invalid)
-            cout<<"Date and Time entered are invalid. Please enter again"<<endl;
+    while (!flag) {
+        if (invalid)
+            cout << "Date and Time entered are invalid. Please enter again" << endl;
         bool leap = false;
         date = Input::getInt();
         month = Input::getInt();
         year = Input::getInt();
         hour = Input::getInt();
         minute = Input::getInt();
-        if (year % 400==0 || ((year % 100==0) ^ (year % 4==0))) {
+        if (year % 400 == 0 || ((year % 100 == 0) ^ (year % 4 == 0))) {
             leap = true;
-            //cout<<"leap"<<leap<<endl;
         }
-        if ((month <= 12 && month >= 1) && (minute<60&&minute>=0) && (hour>=0&&hour<24)) {
+        if ((month <= 12 && month >= 1) && (minute < 60 && minute >= 0) && (hour >= 0 && hour < 24)) {
             if (month != 2) {
                 if (date <= days[month - 1] && date > 0)
                     flag = true;
@@ -51,8 +50,7 @@ void DateTime::inputValidate() {
         }
         invalid = true;
     }
-
-    value = year*10000000000+month*100000000+date*100000+hour*1000+minute;//timestamp hash
+    value = year * 10000000000 + month * 100000000 + date * 100000 + hour * 1000 + minute;      //timestamp hash
 }
 
 bool DateTime::operator<(const DateTime &rhs) const {
