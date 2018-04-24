@@ -58,13 +58,13 @@ bool DateTime::operator<(const DateTime &rhs) const {
 }
 
 bool DateTime::operator>(const DateTime &rhs) const {
-    return rhs < *this;
+    return rhs.value < value;
 }
 
 bool DateTime::operator<=(const DateTime &rhs) const {
-    return !(rhs < *this);
+    return rhs.value >= value;
 }
 
 bool DateTime::operator>=(const DateTime &rhs) const {
-    return !(*this < rhs);
+    return value >= rhs.value;
 }
